@@ -44,8 +44,7 @@ def contact(request):
     return render(request,'contact.html')
     # return HttpResponse("Contact Page")
 def profile(request):
-    return render(request,'profile.html')
-    # return HttpResponse("Profile page of Avishek")
+    return render(request,"profile.html")
 def about(request):
     return render(request,'about.html')
 
@@ -62,7 +61,7 @@ def register(request):
             })
         
         
-        if not role:
+        if not role:    
             return render(request,"register.html",{
                 "blankrole":"Role need to be selected!"
             })
