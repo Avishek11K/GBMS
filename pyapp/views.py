@@ -137,7 +137,7 @@ def process_apply(request, pk):
             house=house        # to which home applied
         )
         
-        # 💡 २. पपअप पछि "Applied successfully!" मेसेज पठाउने
+        #sending succession message
         messages.success(request, "Applied successfully!")
         return redirect('home.html')  
 
@@ -149,6 +149,7 @@ def add(request):
     return render(request,'add.html')
 
 def llhome(request):
+    # user is filtered,fetched according to the order of applied time  stored to notifications
     notifications = Application.objects.filter(user=request.user).order_by('-applied_at')
     
     return render(request, 'llhome.html', {'notifications': notifications})
