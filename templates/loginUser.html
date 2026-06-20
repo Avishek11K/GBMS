@@ -1,0 +1,44 @@
+{% comment %}password:avishek123@@{% endcomment %}
+<html>
+  <title>Register</title>
+  {% load static %}
+  <head>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" />
+  </head>
+  <body>
+    <div class="container">
+      <form method="POST">
+        {% csrf_token %}
+        <div class="forall">
+          <h3>Gharbhanda Management System | Login</h3>
+          <div class="un">
+            Username<br />
+            <input type="text" name="username" placeholder="Enter username" />
+          </div>
+          <br /><br />
+          <div class="em">
+            Email<br />
+            <input type="email" name="email" placeholder="Enter email" />
+          </div>
+          <br /><br />
+          <div class="pwd">
+            Password<br />
+            <input type="password" name="password" placeholder="Enter your password" />
+          </div>
+          <div class="crerror">
+            {% if crerror %}
+              <span><p style="color:red">{{ crerror }}</p></span>
+            {% endif %}
+          </div>
+          <br /><br />
+          <div class="Login">
+            <input type="submit" name="Login" value="Login" />
+          </div><br />
+          <div class="notlogged">
+            <a style="text-decoration: none;" href="/register">Sign up</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

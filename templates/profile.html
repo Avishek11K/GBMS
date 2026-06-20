@@ -1,0 +1,12 @@
+<h3>My Applied Houses:</h3>
+<ul>
+    {% for app in my_applies %}
+        <li>
+            Applied for: <strong>{{ app.house.title }}</strong> | 
+            <small>Applied at: {{ app.applied_at|date:"M d, Y H:i" }}</small>
+        </li>
+    {% empty %}
+        <li>You haven't applied for any houses yet.</li>
+    {% endfor %}
+</ul>
+

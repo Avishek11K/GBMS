@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        header{
+    display: flex;
+    justify-content:right;
+    position:relative;
+    align-items:center;
+    margin: 0px;
+    gap: 1rem;
+}
+nav{
+    display: flex;
+    gap: 40px;
+}
+.nhome{
+    font-size: 20px;
+    gap: 1rem;
+    font-family: 'Times New Roman', Times, serif;
+}
+.ncontact{
+    font-size: 20px;
+    gap: 1rem;
+    font-family: 'Times New Roman', Times, serif;
+}
+.nabout{
+    font-size: 20px;
+    gap: 1rem;
+    font-family: 'Times New Roman', Times, serif;
+}
+.nlogout{
+    font-size: 20px;
+    gap: 1rem;
+    font-family: 'Times New Roman', Times, serif;
+}
+.hamburger{
+    width: 22px;
+    height: auto;
+    cursor: pointer;
+    position: fixed;
+    top:5px;
+    left:5px;
+    z-index:1000;
+}
+.user{
+    display: flex;
+    position: fixed;
+    left:20%;
+}
+
+
+#menu-toggle {
+    display: none;
+}
+
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px; 
+    width: 250px;
+    height: 100%;
+    background-color: grey  ;
+    transition: 0.3s;
+    a:hover{
+        background-color: aqua;
+        border-radius: 10px;
+    }
+}
+
+
+#menu-toggle:checked ~ .sidebar {
+    left: 0px;
+}
+#menu-toggle:checked ~ .hamburger-icon{
+    display: none;
+    left:-60px;
+}
+
+
+.sidebar a {
+    display: block;
+    align-items: center;
+    color: white;
+    
+    padding:20px;
+    text-decoration: none;
+}
+.sidebar{
+    position:fixed;
+    z-index: 999;
+    padding-top: 50px;
+
+}
+
+.one{
+    top: 65px;
+    display: flex;
+    justify-content: flex-start;
+    position: fixed;
+    left:10%;
+   
+}
+.two{
+    top:65px;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    left: 44%;
+   
+}
+.three{
+    top:65px;
+    display: flex;
+    justify-content: flex-end;
+    position: fixed;
+    left: 80%;
+   
+}
+.four{
+    display: flex;
+    position: fixed;
+    justify-content: flex-start;
+    top:50%;
+    left:10%;
+}
+.five{
+    display: flex;
+    position: fixed;
+    justify-content: flex-start;
+    top:50%;
+    left:44%;
+}
+.six{
+   display: flex;
+    position: fixed;
+    justify-content: flex-start;
+    top:50%;
+    left:80%; 
+}
+.notification{
+    width:20px;
+    display: flex;
+    background-color: white;
+    height:auto;
+    right:0px;
+    cursor: pointer;
+}
+#home:checked ~.home.html{
+    left:0px;
+
+}
+section{
+    display: flex;
+    justify-content: space-around;
+}
+
+
+    </style>
+</head>
+
+<body>
+<header>
+        <div class="nav">
+        <nav>
+            {% comment %} <img class="hamburger" src="https://cdn-icons-png.flaticon.com/128/5727/5727012.png" alt=""> {% endcomment %}
+            <label for="menu-toggle" class="hamburger-icon">
+    <img class="hamburger" src="https://cdn-icons-png.flaticon.com/128/5727/5727012.png" alt="">
+</label>
+
+<input type="checkbox" id="menu-toggle">
+
+<div class="sidebar">
+    <a class="s1" href="home.html">Available Rents</a>
+    <a class="s1" href="profile.html">View by price</a>
+    <a class="s1" href="steps.html">Steps for renting</a>
+    <a class="s1" href="about.html">About us</a>
+    <a class="s1" href="profile">Profile</a>
+    <a class="s1" href="logout">Logout</a>
+
+</div>
+            </select>
+            {% comment %} <img class="notification" id="home" src="https://cdn-icons-png.flaticon.com/128/2549/2549900.png" alt=""> {% endcomment %}
+             <a href="{% url 'home.html' %}">
+    <img class="notification" id="home" src="https://cdn-icons-png.flaticon.com/128/2549/2549900.png" alt="Home">
+</a>
+
+
+
+            <a href="{%url 'profile'%}">
+                <img class="notification" id="contact" src="https://cdn-icons-png.flaticon.com/128/8143/8143259.png" alt="">
+            </a>
+            <img class="notification" src="https://cdn-icons-png.flaticon.com/128/5636/5636698.png" alt="">
+            {% comment %} <a class="nhome"style="text-decoration: none;" href="home">Home</a>
+            <a class="ncontact"style="text-decoration: none;" href="contact">Contact</a>
+            <a class="nabout"style="text-decoration: none;" href="about">About us</a> {% endcomment %}
+            {% comment %} <a class="nlogout"style="text-decoration: none;" href="logout">Logout</a> {% endcomment %}
+            <img class="notification" src="https://cdn-icons-png.flaticon.com/128/3602/3602145.png" alt="">
+        </nav>
+        </div>
+        
+   
+    </header>
+    <main>
+
+    </main>
+    <footer></footer>
+</body>
+</html>
+

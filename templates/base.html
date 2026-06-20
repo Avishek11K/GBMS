@@ -1,0 +1,103 @@
+{% extends "header.html" %}
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    {% block body %}
+    <body>
+        <main>
+        <div class="user" style="color:black;align-items: center;border-radius: 8px;font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; left:10%">
+            <p>Welcome {{user.username}}</p>
+        </div>
+        <section class="one">
+            <div class="for-one">
+                <h2>House 1</h2>
+                <img src="https://cdn-icons-png.flaticon.com/128/3602/3602145.png" alt="for one picture">
+                <span><p>This is the house one which you</p>
+                    <p>are willing to view</p></span><br>
+                <span>
+                  <a style="text-decoration: none; gap:4rem; "href="viewhtml">View</a>
+                  {% comment %} <a style="text-decoration: none; gap:4rem; "href="apply.html">Book</a> {% endcomment %}
+                  <a style="text-decoration: none; gap:4rem; "href="contact">Contact/message</a>
+                </span>
+
+            </div>
+        </section>
+        <section class="two">
+ <div class="for-two">
+                <h2>House 2</h2>
+                <img src="https://cdn-icons-png.flaticon.com/128/5636/5636698.png" alt="for one picture">
+                <span><p>This is the house one which you</p>
+                    <p>are willing to view</p></span><br>
+                <span>
+                  <a style="text-decoration: none; gap:4rem; "href="viewhtml">View</a>
+                  {% comment %} <a style="text-decoration: none; gap:4rem; "href="apply.html">Apply</a> {% endcomment %}
+                  <a style="text-decoration: none; gap:4rem; "href="contact">Contact/message</a>
+                </span>
+
+
+            </div>
+        </section>
+        <section class="three">
+<div class="for-three">
+                <h2>House 3</h2>
+                <img src="https://cdn-icons-png.flaticon.com/128/5636/5636698.png" alt="for one picture">
+                <span><p>This is the house three which you</p>
+                    <p>are willing to view</p></span><br>
+                <span>
+                  <a style="text-decoration: none; gap:4rem; "href="viewhtml">View</a>
+                  {% comment %} <a style="text-decoration: none; gap:4rem; "href="apply.html">Apply</a> {% endcomment %}
+                  <a style="text-decoration: none; gap:4rem; "href="contact.html">Contact/message</a>
+                </span>
+
+        </section>
+         <section class="four">
+<div class="for-four">
+                <h2>House 4</h2>
+                <img src="https://cdn-icons-png.flaticon.com/128/5636/5636698.png" alt="for one picture">
+                <span><p>This is the house four which you</p>
+                    <p>are willing to view</p></span><br>
+                <span>
+                  <a style="text-decoration: none; gap:4rem; "href="viewhtml">View</a>
+                  {% comment %} <a style="text-decoration: none; gap:4rem; "href="apply.html">Apply</a> {% endcomment %}
+                  <a style="text-decoration: none; gap:4rem; "href="contact.html">Contact/message</a>
+                </span>
+
+        </section>
+         <section class="five">
+<div class="for-five">
+                <h2>House 5</h2>
+                <img src="https://cdn-icons-png.flaticon.com/128/5636/5636698.png" alt="for one picture">
+                <span><p>This is the house five which you</p>
+                    <p>are willing to view</p></span><br>
+                <span>
+                  <a style="text-decoration: none; gap:4rem; "href="viewhtml">View</a>
+                  {% comment %} <a style="text-decoration: none; gap:4rem; "href="apply.html">Apply</a> {% endcomment %}
+                  <a style="text-decoration: none; gap:4rem; "href="contact.html">Contact/message</a>
+                </span>
+
+        </section>
+         <section class="six">
+<div class="for-six">
+                <h2>House 6</h2>
+                <img src="https://cdn-icons-png.flaticon.com/128/5636/5636698.png" alt="for one picture">
+                <span><p>This is the house six which you</p>
+                    <p>are willing to view</p></span><br>
+                <span>
+                  <a style="text-decoration: none; gap:4rem; "href="viewhtml">View</a>
+                  {% comment %} <a style="text-decoration: none; gap:4rem; "href="apply.html">Apply</a> {% endcomment %}
+                  <a style="text-decoration: none; gap:4rem; "href="contact.html">Contact/message</a>
+                </span>
+
+        </section>
+    </main>
+         
+    <footer></footer>
+</body>
+{% endblock body %}
+</html>
