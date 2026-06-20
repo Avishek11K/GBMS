@@ -15,9 +15,9 @@ urlpatterns = [
     # path("vd/<int:pk>/",views.view_details,name="view_details"),
     path('home/<int:pk>/', views.view_details, name='view_details'),
     path("llhome",views.llhome,name="llhome"),
-    path("notify",views.notify,name="notify"),
    #  'proces_apply' लाई 'process_apply' बनाएको र <int:house_id> थपेको:
    path("apply/<int:pk>/", views.process_apply, name="process_apply"),
    path("add",views.add,name="add"),
-   path("notify.html",views.notify,name="notify.html")
+   path("notify.html",views.notify,name="notify.html"),
+   path("llprofile",views.llprofile,name="llprofile")
 ]

@@ -146,8 +146,11 @@ def llhome(request):
     
     return render(request, 'llhome.html', {'notifications': notifications})
 
-def notify(request):
-    return(request)
+# def notify(request):
+#     return(request)
+def llprofile(request):
+    return render (request,"llprofile.html")
+
 
 def about(request):
     return render (request,"about.html")
@@ -158,4 +161,6 @@ def notify(request):
 def logout(request):
     logout_auth(request)
     return render(request,"loginUser.html")
+
+
 

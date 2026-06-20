@@ -182,30 +182,31 @@ section{
 
 <div class="sidebar">
     <a class="s1" href="add.html">Add rent</a>
-    <a class="s1" href="profile.html">View by price</a>
-    <a class="s1" href="steps.html">Steps for renting</a>
+     <a class="s1" href="home.html">Available rent</a>
+    {% comment %} <a class="s1" href="profile.html">View by price</a> {% endcomment %}
+    {% comment %} <a class="s1" href="steps.html">Steps for renting</a> {% endcomment %}
     <a class="s1" href="about.html">About us</a>
-    <a class="s1" href="profile">Profile</a>
+    <a class="s1" href="llprofile">Profile</a>
     <a class="s1" href="logout">Logout</a>
 
 </div>
             </select>
             {% comment %} <img class="notification" id="home" src="https://cdn-icons-png.flaticon.com/128/2549/2549900.png" alt=""> {% endcomment %}
-             <a href="{% url 'llhome' %}">
+             <a href="{% url 'home.html' %}">
     <img class="notification" id="home" src="https://cdn-icons-png.flaticon.com/128/2549/2549900.png" alt="Home">
 </a>
 
 
 
-            <a href="">
+            <a href="{% url 'llprofile'%}">
                 <img class="notification" id="contact" src="https://cdn-icons-png.flaticon.com/128/8143/8143259.png" alt="">
             </a>
-            <img class="notification" src="https://cdn-icons-png.flaticon.com/128/5636/5636698.png" alt="">
+            {% comment %} <img class="notification" src="https://cdn-icons-png.flaticon.com/128/5636/5636698.png" alt=""> {% endcomment %}
             {% comment %} <a class="nhome"style="text-decoration: none;" href="home">Home</a>
             <a class="ncontact"style="text-decoration: none;" href="contact">Contact</a>
             <a class="nabout"style="text-decoration: none;" href="about">About us</a> {% endcomment %}
             {% comment %} <a class="nlogout"style="text-decoration: none;" href="logout">Logout</a> {% endcomment %}
-            <a href="notify.html">
+            <a href="#">
             <img class="notification" src="https://cdn-icons-png.flaticon.com/128/3602/3602145.png" alt="">
             </a>
         </nav>
@@ -214,7 +215,6 @@ section{
         </header>
         <body>
     <div class="wel" style="margin-left: 17%; margin-top: 5%;">
-        <p>Welcome, <strong>{{ landlord.name }}</strong></p>
     </div>
     
     <div class="house-container">

@@ -1,0 +1,309 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+
+    <style>
+        /* केवल यो कार्डलाई मात्र बीचमा ल्याउन र स्टाइल गर्न */
+        .my-profile-section {
+            display: flex;
+            justify-content: center;
+            margin: 40px auto;
+            font-family: sans-serif;
+        }
+
+        .profile-box {
+            background: #ffffff;
+            width: 350px;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+
+        .profile-box .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: block;
+            margin: 0 auto 15px auto;
+            object-fit: cover;
+        }
+
+        .profile-box .title-text {
+            text-align: center;
+            margin: 0 0 20px 0;
+            font-size: 20px;
+        }
+
+        .profile-box .row-data {
+            padding: 8px 0;
+            border-bottom: 1px dashed #ddd;
+            font-size: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .profile-box .bold-lbl {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .profile-box .btn-block {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .profile-box .logout-btn {
+            display: inline-block;
+            padding: 8px 20px;
+            background-color: red;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+{% comment %} 
+         <style> {% endcomment %} 
+         {% comment %} for header start: {% endcomment %}
+        header{
+    display: flex;
+    justify-content:right;
+    position:relative;
+    align-items:center;
+    margin: 0px;
+    gap: 1rem;
+}
+nav{
+    display: flex;
+    gap: 40px;
+}
+.nhome{
+    font-size: 20px;
+    gap: 1rem;
+    font-family: 'Times New Roman', Times, serif;
+}
+.ncontact{
+    font-size: 20px;
+    gap: 1rem;
+    font-family: 'Times New Roman', Times, serif;
+}
+.nabout{
+    font-size: 20px;
+    gap: 1rem;
+    font-family: 'Times New Roman', Times, serif;
+}
+.nlogout{
+    font-size: 20px;
+    gap: 1rem;
+    font-family: 'Times New Roman', Times, serif;
+}
+.hamburger{
+    width: 22px;
+    height: auto;
+    cursor: pointer;
+    position: fixed;
+    top:5px;
+    left:5px;
+    z-index:1000;
+}
+.user{
+    display: flex;
+    position: fixed;
+    left:20%;
+}
+
+
+#menu-toggle {
+    display: none;
+}
+
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px; 
+    width: 250px;
+    height: 100%;
+    background-color: grey  ;
+    transition: 0.3s;
+    a:hover{
+        background-color: aqua;
+        border-radius: 10px;
+    }
+}
+
+
+#menu-toggle:checked ~ .sidebar {
+    left: 0px;
+}
+#menu-toggle:checked ~ .hamburger-icon{
+    display: none;
+    left:-60px;
+}
+
+
+.sidebar a {
+    display: block;
+    align-items: center;
+    color: white;
+    
+    padding:20px;
+    text-decoration: none;
+}
+.sidebar{
+    position:fixed;
+    z-index: 999;
+    padding-top: 50px;
+
+}
+
+.one{
+    top: 65px;
+    display: flex;
+    justify-content: flex-start;
+    position: fixed;
+    left:10%;
+   
+}
+.two{
+    top:65px;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    left: 44%;
+   
+}
+.three{
+    top:65px;
+    display: flex;
+    justify-content: flex-end;
+    position: fixed;
+    left: 80%;
+   
+}
+.four{
+    display: flex;
+    position: fixed;
+    justify-content: flex-start;
+    top:50%;
+    left:10%;
+}
+.five{
+    display: flex;
+    position: fixed;
+    justify-content: flex-start;
+    top:50%;
+    left:44%;
+}
+.six{
+   display: flex;
+    position: fixed;
+    justify-content: flex-start;
+    top:50%;
+    left:80%; 
+}
+.notification{
+    width:20px;
+    display: flex;
+    background-color: white;
+    height:auto;
+    right:0px;
+    cursor: pointer;
+}
+#home:checked ~.home.html{
+    left:0px;
+
+}
+section{
+    display: flex;
+    justify-content: space-around;
+}
+
+{% comment %} 
+    </style> {% endcomment %}
+    </style>
+</head>
+<body>
+<header>
+        <div class="nav">
+        <nav>
+            {% comment %} <img class="hamburger" src="https://cdn-icons-png.flaticon.com/128/5727/5727012.png" alt=""> {% endcomment %}
+            <label for="menu-toggle" class="hamburger-icon">
+    <img class="hamburger" src="https://cdn-icons-png.flaticon.com/128/5727/5727012.png" alt="">
+</label>
+
+<input type="checkbox" id="menu-toggle">
+
+<div class="sidebar">
+    <a class="s1" href="home.html">Available Rents</a>
+    {% comment %} <a class="s1" href="profile.html">View by price</a> {% endcomment %}
+    {% comment %} <a class="s1" href="steps.html">Steps for renting</a> {% endcomment %}
+    <a class="s1" href="about.html">About us</a>
+    <a class="s1" href="llprofile">Profile</a>
+    <a class="s1" href="logout">Logout</a>
+
+</div>
+            </select>
+            {% comment %} <img class="notification" id="home" src="https://cdn-icons-png.flaticon.com/128/2549/2549900.png" alt=""> {% endcomment %}
+             <a href="{% url 'llhome' %}">
+    <img class="notification" id="home" src="https://cdn-icons-png.flaticon.com/128/2549/2549900.png" alt="Home">
+</a>
+
+
+
+            <a href="{%url 'llprofile'%}">
+                <img class="notification" id="contact" src="https://cdn-icons-png.flaticon.com/128/8143/8143259.png" alt="">
+            </a>
+            {% comment %} <img class="notification" src="https://cdn-icons-png.flaticon.com/128/5636/5636698.png" alt=""> {% endcomment %}
+            {% comment %} <a class="nhome"style="text-decoration: none;" href="home">Home</a>
+            <a class="ncontact"style="text-decoration: none;" href="contact">Contact</a>
+            <a class="nabout"style="text-decoration: none;" href="about">About us</a> {% endcomment %}
+            {% comment %} <a class="nlogout"style="text-decoration: none;" href="logout">Logout</a> {% endcomment %}
+            <img class="notification" src="https://cdn-icons-png.flaticon.com/128/3602/3602145.png" alt="">
+        </nav>
+        </div>
+        
+</header>
+    <div class="my-profile-section">
+        <div class="profile-box">
+            
+            {% if user.profile.image %}
+                <img src="{{ user.profile.image.url }}" alt="Profile" class="avatar">
+            {% else %}
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile" class="avatar">
+            {% endif %}
+
+            <h2 class="title-text">Welcome, {{ landlord.username }}!</h2>
+
+            <div class="row-data">
+                <span class="bold-lbl">Username:</span>
+                <span>{{ landlord.username }}</span>
+            </div>
+
+            <div class="row-data">
+                <span class="bold-lbl">Email:</span>
+                <span>{{ landlord.email }}</span>
+            </div>
+
+            <div class="row-data">
+                <span class="bold-lbl">Role:</span>
+                <span>{{ user.groups.all.0.name|default:"No Role" }}</span>
+            </div>
+
+            <div class="row-data">
+                <span class="bold-lbl">Joined On:</span>
+                <span>{{ user.date_joined|date:"M d, Y" }}</span>
+            </div>
+
+            <div class="btn-block">
+                <a href="{% url 'loginUser' %}" class="logout-btn">Logout</a>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
