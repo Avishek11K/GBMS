@@ -1,4 +1,5 @@
 from django.db import models
+# inbuilt model:user that is imported i.e. djnago.contrib.auth.models
 from django.contrib.auth.models import User
 
 # Create your models here.
@@ -10,7 +11,9 @@ class Contact(models.Model):
     
     def __str__(self):
         return (self.name+" "+self.email)
+        
     
+# Home models or database 
 class Home(models.Model):
     title=models.CharField(max_length=500)
     location=models.CharField(max_length=500)
@@ -26,6 +29,8 @@ class availablerent(models.Model):
     price=models.IntegerField()
     image=models.ImageField(upload_to='houses/')
 
+# landlord model
+
 class landlord(models.Model):
     name=models.CharField(max_length=450)
     email=models.CharField(max_length=450)
@@ -34,11 +39,14 @@ class landlord(models.Model):
     def __str__(self):
         return self.name
 
+# store the applied data by specified user in Application model
 class Application(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     house = models.ForeignKey(Home,on_delete=models.CASCADE)
     applied_at = models.DateTimeField(auto_now_add=True)
 
+
+# roomseeker model
 class roomseeker(models.Model):
     name=models.CharField(max_length=450)
     email=models.CharField(max_length=450)
