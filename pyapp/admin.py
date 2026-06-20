@@ -1,3 +1,6 @@
+#here models imported and the imported model along with registered are shown in-
+# admin site i.e. the registered models like Home,Application,landlord are registered
+
 from django.contrib import admin
 from pyapp.models import Contact
 from pyapp.models import Home

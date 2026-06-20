@@ -6,9 +6,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
-
+ <!-- styling starts :JC -->
     <style>
-        /* केवल यो कार्डलाई मात्र बीचमा ल्याउन र स्टाइल गर्न */
+        
         .my-profile-section {
             display: flex;
             justify-content: center;
@@ -65,40 +65,42 @@
             font-weight: bold;
         }
     </style>
+
+    <!-- stylng ends -->
 </head>
 <body>
 
     <div class="my-profile-section">
         <div class="profile-box">
-            
+            <!-- if user consists image display else display avatar type -->
             {% if user.profile.image %}
                 <img src="{{ user.profile.image.url }}" alt="Profile" class="avatar">
             {% else %}
                 <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile" class="avatar">
             {% endif %}
-
+<!--username from inbuilt user model  -->
             <h2 class="title-text">Welcome, {{ user.username }}!</h2>
 
             <div class="row-data">
                 <span class="bold-lbl">Username:</span>
                 <span>{{ user.username }}</span>
             </div>
-
+<!-- email -->
             <div class="row-data">
                 <span class="bold-lbl">Email:</span>
                 <span>{{ user.email }}</span>
             </div>
-
+<!-- Role according to selected at the register -->
             <div class="row-data">
                 <span class="bold-lbl">Role:</span>
                 <span>{{ user.groups.all.0.name|default:"No Role" }}</span>
             </div>
-
+<!--joined date  -->
             <div class="row-data">
                 <span class="bold-lbl">Joined On:</span>
                 <span>{{ user.date_joined|date:"M d, Y" }}</span>
             </div>
-
+<!--logout redirected to loginuser.html  -->
             <div class="btn-block">
                 <a href="{% url 'loginUser' %}" class="logout-btn">Logout</a>
             </div>

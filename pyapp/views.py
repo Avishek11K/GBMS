@@ -1,6 +1,8 @@
 # from django.shortcuts import render
 
 # Create your views here.
+
+#models,impport hashpassword creator,or query and packaages imported AK
 from django.shortcuts import render ,redirect,get_object_or_404
 from django.contrib.auth.hashers import make_password
 from pyapp.models import Home
@@ -15,11 +17,12 @@ from django.http import HttpResponse
 from pyapp.models import Contact,Application
 from django.contrib import messages
 
+#fetches the data from Home database and sent to the fomefetch :AD
 def home_data(request):
     homedata=Home.objects.all()
     return render(request,'home.html',{'homefetch':homedata})
 
-
+#Main dynamic routing :AK
 def view_details(request,pk):
     det=get_object_or_404(Home, pk=pk)
     # print("det", det)
@@ -35,7 +38,9 @@ def pyapp(request):
     return render(request, 'pyapp.html',context)
     # return HttpResponse("Hello, Avishek is learning Django!!")
     #Httpresponse return gardaa text matra display vatyo vane render le euta template ko html,css lai nai as a whole display garxa
-    
+
+
+#by :JC here,normal rendering relevant pages 
 def home(request):
     return render(request,'home.html')
     # return HttpResponse("Home page")
@@ -48,6 +53,8 @@ def profile(request):
 def about(request):
     return render(request,'about.html')
 
+
+#Register the user or lanlord according to the role AK
 def register(request):
     if request.method=="POST":
         role=request.POST.get('role',"")
@@ -96,7 +103,7 @@ def register(request):
         return redirect('loginUser')
     return render(request,'register.html')
 
-
+#Login ensuring correctness from the register by the data JC
 def loginUser(request):
     if request.method=="POST":
         username=request.POST.get('username')
@@ -130,7 +137,7 @@ def process_apply(request, pk):
             house=house        # to which home applied
         )
         
-        # 💡 २. पपअप पछि "Applied successfully!" मेसेज पठाउने
+        #sending succession message
         messages.success(request, "Applied successfully!")
         return redirect('home.html')  
 
@@ -142,6 +149,7 @@ def add(request):
     return render(request,'add.html')
 
 def llhome(request):
+    # user is filtered,fetched according to the order of applied time  stored to notifications
     notifications = Application.objects.filter(user=request.user).order_by('-applied_at')
     
     return render(request, 'llhome.html', {'notifications': notifications})
@@ -151,7 +159,7 @@ def llhome(request):
 def llprofile(request):
     return render (request,"llprofile.html")
 
-
+#views for others,simple rendering only
 def about(request):
     return render (request,"about.html")
 
