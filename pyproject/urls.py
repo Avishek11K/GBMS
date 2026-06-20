@@ -20,14 +20,18 @@ from django.conf import settings
 from django.conf.urls.static import static
 # import settings,static
 
+# manually renamed the admin portal 
 admin.site.site_header = "Gharbhanda Admin"
 admin.site.site_title = "Gharbhanda Admin Portal"
 admin.site.index_title = "Welcome to Gharbhanda admin Portal"
 
 urlpatterns = [
+    # in url if entered /admin render the inbuilt admin portal
     path('admin/', admin.site.urls),
+    # whatever is entered i.e. /home or /contact find relevant url in pyapp,which directs to views and render the relevant content
     path('',include('pyapp.urls'))
 ]
+# for supporting the media files used in Home models
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)
