@@ -4,8 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .first{
+           height: 40%;
+           width: 30%;
+           background-color: aqua;
+           border: 3px solid  aqua;
+           padding: 40px;
+           border-radius: 10px;
+           margin: 0%;
+        }
+    </style>
 </head>
 <body>
-    Adding home here
+   <header>
+
+
+   </header>
+   <main>
+    <section class="first">
+        <form action="" method="post">
+            {% csrf_token %}
+            Title: <br>
+            <input type="text" name="title" placeholder="Enter the title"> <br><br>
+             Location: <br>
+            <input type="text" name="location" placeholder="Enter the Location"> <br><br>
+             Price: <br>
+            <input type="text" name="title" placeholder="Enter the price"> <br><br>
+             Description: <br>
+            <input type="textarea" name="description" placeholder="Enter the description"> <br><br>
+             <br>
+            <input type="submit" name="save" value="Add">
+        </form>
+
+    </section>
+   </main>
 </body>
 </html>

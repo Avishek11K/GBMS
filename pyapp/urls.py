@@ -18,7 +18,7 @@ urlpatterns = [
     path('home/<int:pk>/', views.view_details, name='view_details'),
     path("llhome",views.llhome,name="llhome"),
    path("apply/<int:pk>/", views.process_apply, name="process_apply"),
-   path("add",views.add,name="add"),
+   path("add.html",views.add,name="add.html"),
    path("notify.html",views.notify,name="notify.html"),
    path("llprofile",views.llprofile,name="llprofile")
 ]
