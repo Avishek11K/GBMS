@@ -9,7 +9,7 @@ from pyapp.models import Home
 from django.contrib import messages
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.models import User
-from pyapp.models import landlord,roomseeker
+from pyapp.models import Home,landlord,roomseeker
 from django.contrib.auth import logout as logout_auth
 from django.db.models import Q  # Import Q for OR operations
 from django.contrib.auth import authenticate, login as login_auth
@@ -146,8 +146,22 @@ def viewhtml(request):
     return render(request,'viewhtml.html')
 
 def add(request):
-    return render(request,'add.html')
-
+    if request.method=="POST":
+        title=request.POST.get('title')
+        location=request.POST.get('location')
+        price=request.POST.get('price')
+        description=request.POST.get('desc')
+        image=request.FILES.getlist('image')
+        
+        addhome=Home.objects.create(
+                title=title,
+                location=location,
+                price=price,
+                description=description,
+                image=image
+            )
+        addhome
+    return render(request,"add.html")
 def llhome(request):
     # user is filtered,fetched according to the order of applied time  stored to notifications
     notifications = Application.objects.filter(user=request.user).order_by('-applied_at')

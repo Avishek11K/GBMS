@@ -12,15 +12,16 @@ class Contact(models.Model):
     def __str__(self):
         return (self.name+" "+self.email)
     # Home models or database 
-class Home(models.Model):
-    title=models.CharField(max_length=500)
-    location=models.CharField(max_length=500)
-    price=models.IntegerField()
-    description=models.TextField()
-    image=models.ImageField(upload_to='houses/')
+# class Home(models.Model):
+#     landlord=models.ForeignKey(, on_delete=models.CASCADE)
+#     title=models.CharField(max_length=500)
+#     location=models.CharField(max_length=500)
+#     price=models.IntegerField()
+#     description=models.TextField()
+#     image=models.ImageField(upload_to='houses/')
 
-    def __str__(self):
-        return (self.title)
+#     def __str__(self):
+#         return (self.title)
     
 class availablerent(models.Model):
     address=models.CharField(max_length=450)
@@ -35,6 +36,19 @@ class landlord(models.Model):
 
     def __str__(self):
         return self.name
+    
+
+class Home(models.Model):
+    landlord=models.ForeignKey(landlord, on_delete=models.CASCADE, null=True, blank=True)
+    title=models.CharField(max_length=500)
+    location=models.CharField(max_length=500)
+    price=models.IntegerField()
+    description=models.TextField()
+    image=models.ImageField(upload_to='houses/')
+
+    def __str__(self):
+        return (self.title)
+
 # store the applied data by specified user in Application model
 class Application(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
