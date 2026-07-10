@@ -147,7 +147,7 @@ def viewhtml(request):
 
 def add(request):
     if request.method=="POST":
-        title=request.POST.get('title')
+        title=request.POST.get('title',"")
         location=request.POST.get('location')
         price=request.POST.get('price')
         description=request.POST.get('desc')
