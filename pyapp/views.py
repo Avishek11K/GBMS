@@ -9,14 +9,14 @@ from pyapp.models import Home
 from django.contrib import messages
 from django.contrib.auth.models import User, Group
 # from django.contrib.auth.models import User
-from pyapp.models import Home, landlord, roomseeker, HomeImage
+from pyapp.models import Home, Landlord, roomseeker, HomeImage
 from django.contrib.auth import logout as logout_auth
 from django.db.models import Q  # Import Q for OR operations
 from django.contrib.auth import authenticate, login as login_auth
 from django.http import HttpResponse
 from pyapp.models import Contact,Application
 from django.contrib import messages
-from pyapp.models import landlord
+from pyapp.models import Landlord
 # fieldfile or contentfile is supported instead of pillow so:
 
 # from django.core.files import ImageFile
@@ -118,7 +118,7 @@ def register(request):
         user.groups.add(group)
 
         if role=="landlord":
-            landlord.objects.create(user=user)
+            Landlord.objects.create(user=user)
         if role=="rentseeker":
             roomseeker.objects.create(name=username,email=email,password=make_password(password))
         return redirect('loginUser')
@@ -168,7 +168,9 @@ def viewhtml(request):
 
 def add(request):
     if request.method=="POST":
-        ll=landlord.objects.get(user=request.user)
+        ll=Landlord.objects.get(user=request.user)
+        # print(ll.pk)
+        # print(request.user.pk)
         title=request.POST.get('title',"")
         location=request.POST.get('location')
         price=request.POST.get('price')

@@ -29,7 +29,7 @@ class availablerent(models.Model):
     image=models.ImageField(upload_to='houses/')
 
 # landlord model
-class landlord(models.Model):
+class Landlord(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE,primary_key=True)
     # def __str__(self):
     #     return self.user.username
@@ -38,7 +38,7 @@ class landlord(models.Model):
         return username
 
 class Home(models.Model):
-    landlord=models.ForeignKey(landlord, on_delete=models.CASCADE, null=True, blank=True, related_name="homes")
+    landlord=models.ForeignKey(Landlord, on_delete=models.CASCADE, null=True, blank=True, related_name="homes")
     title=models.CharField(max_length=500)
     location=models.CharField(max_length=500)
     price=models.IntegerField()

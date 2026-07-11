@@ -14,8 +14,8 @@ admin.site.register(availablerent)
 # from pyapp.models import janak
 # admin.site.register(janak)
 
-from pyapp.models import landlord
-admin.site.register(landlord)
+from pyapp.models import Landlord
+admin.site.register(Landlord)
 
 from pyapp.models import Application
 admin.site.register(Application)
