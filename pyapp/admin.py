@@ -22,3 +22,6 @@ admin.site.register(Application)
 
 from pyapp.models import roomseeker
 admin.site.register(roomseeker)
+
+from pyapp.models import HomeImage
+admin.site.register(HomeImage)

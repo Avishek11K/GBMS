@@ -8,14 +8,33 @@ from django.contrib.auth.hashers import make_password
 from pyapp.models import Home
 from django.contrib import messages
 from django.contrib.auth.models import User, Group
-from django.contrib.auth.models import User
-from pyapp.models import Home,landlord,roomseeker
+# from django.contrib.auth.models import User
+from pyapp.models import Home, landlord, roomseeker, HomeImage
 from django.contrib.auth import logout as logout_auth
 from django.db.models import Q  # Import Q for OR operations
 from django.contrib.auth import authenticate, login as login_auth
 from django.http import HttpResponse
 from pyapp.models import Contact,Application
 from django.contrib import messages
+from pyapp.models import landlord
+# fieldfile or contentfile is supported instead of pillow so:
+
+# from django.core.files import ImageFile
+# from PIL import image
+# from django.core.files.base import ContentFile
+
+
+# # If you have a PIL Image object
+# image_file = ImageFile(pil_image_object)
+# Home.image = image_file
+
+# # Or save to BytesIO and use ContentFile
+# from io import BytesIO
+# buffer = BytesIO()
+# pil_image_object.save(buffer, format='JPEG')
+# Home.image.save('image.jpg', ContentFile(buffer.getvalue()), save=False)   
+
+# ends here
 
 #fetches the data from Home database and sent to the fomefetch :AD
 def home_data(request):
@@ -92,12 +111,14 @@ def register(request):
         email=email,
         password=password
         )
+        # landlord.objects.create(user=user)
+
         group,created=Group.objects.get_or_create(name=role)
 
         user.groups.add(group)
 
         if role=="landlord":
-            landlord.objects.create(name=username,email=email,password=password)
+            landlord.objects.create(user=user)
         if role=="rentseeker":
             roomseeker.objects.create(name=username,email=email,password=make_password(password))
         return redirect('loginUser')
@@ -147,20 +168,26 @@ def viewhtml(request):
 
 def add(request):
     if request.method=="POST":
+        ll=landlord.objects.get(user=request.user)
         title=request.POST.get('title',"")
         location=request.POST.get('location')
         price=request.POST.get('price')
         description=request.POST.get('desc')
         image=request.FILES.getlist('image')
-        
+
         addhome=Home.objects.create(
+                landlord=ll,
                 title=title,
                 location=location,
                 price=price,
-                description=description,
-                image=image
+                description=description
             )
-        addhome
+        for img in image:
+            HomeImage.objects.create(
+                home=addhome,
+                image=img
+            )
+            return redirect("home")
     return render(request,"add.html")
 def llhome(request):
     # user is filtered,fetched according to the order of applied time  stored to notifications
