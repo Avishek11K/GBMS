@@ -1,0 +1,35 @@
+<style>
+header{ display:flex; justify-content:right; position:relative; align-items:center; margin:0px; gap:1rem; }
+.hamburger{ width:22px; height:auto; cursor:pointer; position:fixed; top:5px; left:5px; z-index:1000; }
+#menu-toggle{ display:none; }
+.sidebar{ position:fixed; top:0; left:-250px; width:250px; height:100%; background-color:#333; transition:0.3s; z-index:999; padding-top:50px; }
+#menu-toggle:checked ~ .sidebar{ left:0px; }
+.sidebar a{ display:block; color:white; padding:20px; text-decoration:none; }
+.sidebar a:hover{ background-color:#1a7a5e; }
+.notification{ width:24px; display:inline-block; height:auto; cursor:pointer; margin-left:14px; position:relative; }
+.notif-badge{ position:absolute; top:-6px; right:-6px; background:#f2a541; color:#412402; font-size:10px; font-weight:bold; border-radius:20px; padding:1px 5px; }
+</style>
+<header>
+    <div class="nav">
+    <nav>
+        <label for="menu-toggle" class="hamburger-icon">
+            <img class="hamburger" src="https://cdn-icons-png.flaticon.com/128/5727/5727012.png" alt="menu">
+        </label>
+        <input type="checkbox" id="menu-toggle">
+        <div class="sidebar">
+            <a href="{% url 'add.html' %}">Add rent</a>
+            <a href="{% url 'llhome' %}">My listings</a>
+            <a href="{% url 'notify' %}">Notifications</a>
+            <a href="{% url 'about.html' %}">About us</a>
+            <a href="{% url 'llprofile' %}">Profile</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        </div>
+        <a href="{% url 'llhome' %}"><img class="notification" src="https://cdn-icons-png.flaticon.com/128/2549/2549900.png" alt="Home"></a>
+        <a href="{% url 'notify' %}" style="position:relative;">
+            <img class="notification" src="https://cdn-icons-png.flaticon.com/128/3602/3602145.png" alt="Notifications">
+            {% if pending_count %}<span class="notif-badge">{{ pending_count }}</span>{% endif %}
+        </a>
+        <a href="{% url 'llprofile' %}"><img class="notification" src="https://cdn-icons-png.flaticon.com/128/8143/8143259.png" alt="Profile"></a>
+    </nav>
+    </div>
+</header>

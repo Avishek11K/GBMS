@@ -1,0 +1,62 @@
+{% include "header.html" %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ vd.title }} - Details</title>
+</head>
+<body>
+    <main style="padding: 80px; max-width: 800px; margin:0 auto;">
+
+        <h1>{{ vd.title }}</h1>
+        <hr>
+
+        <div class="detail-container">
+            {% if vd.images.first %}
+                <img src="{{ vd.images.first.image.url }}" width="100%" style="border-radius: 8px;" alt="House Image">
+            {% endif %}
+
+            <p><strong>Location:</strong> {{ vd.location }}</p>
+            <p><strong>Price:</strong> Rs. {{ vd.price }}</p>
+            <p><strong>Description:</strong> {{ vd.description }}</p>
+
+            <div style="margin-top:20px;">
+                <h3>Contact Landlord</h3>
+                {% if vd.landlord.phone %}
+                    <a href="https://wa.me/{{ vd.landlord.phone }}?text=Hello%2C%20I%27m%20interested%20in%20{{ vd.title|urlencode }}"
+                       target="_blank"
+                       style="text-decoration: none; border:2px solid #25D366; border-radius: 5px; background-color: #d9fdd3; padding: 8px 14px; margin-right:10px;">
+                        Contact on WhatsApp
+                    </a>
+                    <a href="tel:{{ vd.landlord.phone }}" style="text-decoration: none; border:2px solid #333; border-radius: 5px; padding: 8px 14px;">
+                        Call {{ vd.landlord.phone }}
+                    </a>
+                {% else %}
+                    <p style="color:#888;">Landlord hasn't added a contact number yet.</p>
+                {% endif %}
+            </div>
+
+            <div style="margin-top:25px;">
+                {% if already_applied %}
+                    <span style="background:#dbeee7; color:#14614a; padding:8px 14px; border-radius:6px;">You have already applied for this house.</span>
+                {% else %}
+                    <form action="{% url 'process_apply' vd.id %}" method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <input type="submit" name="apply" value="Apply now"
+                               style="cursor:pointer; background:#1a7a5e; color:#fff; border:none; padding:10px 20px; border-radius:6px; font-weight:bold;"
+                               onclick="return confirm('Are you sure to apply?');">
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+
+        <br>
+        <a href="{% url 'home.html' %}" style="background: #333; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
+            Back
+        </a>
+
+    </main>
+</body>
+</html>

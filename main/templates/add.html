@@ -1,0 +1,41 @@
+{% include "llheader.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add House</title>
+    <style>
+        .first{
+           width: 400px;
+           border: 4px solid #eee;
+           padding: 40px;
+           border-radius: 15px;
+           margin: 6% auto;
+        }
+        .first input, .first textarea { width:100%; padding:8px; margin-bottom:12px; border:1px solid #ccc; border-radius:6px; box-sizing:border-box; }
+        .first input[type=submit] { background:#1a7a5e; color:#fff; border:none; cursor:pointer; font-weight:bold; padding:10px; }
+    </style>
+</head>
+<body>
+   <main>
+    <div class="first">
+        <h2>Add a new house listing</h2>
+        <form action="" enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            Title: <br>
+            <input type="text" name="title" placeholder="Enter the title" required>
+            Location: <br>
+            <input type="text" name="location" placeholder="Enter the Location" required>
+            Price (Rs./month): <br>
+            <input type="number" name="price" placeholder="Enter the price" required>
+            Description: <br>
+            <textarea name="desc" placeholder="Enter the rent/house descriptions" rows="4"></textarea>
+            Photos: <br>
+            <input type="file" name="image" multiple>
+            <input type="submit" name="save" value="Add House">
+        </form>
+    </div>
+   </main>
+</body>
+</html>
