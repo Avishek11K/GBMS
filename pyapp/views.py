@@ -168,7 +168,7 @@ def viewhtml(request):
 
 def add(request):
     if request.method=="POST":
-        ll=Landlord.objects.get(user=request.user)
+        ll=Landlord.objects.get(user_id=request.user.id)
         # print(ll.pk)
         # print(request.user.pk)
         title=request.POST.get('title',"")

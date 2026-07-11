@@ -34,8 +34,8 @@ class Landlord(models.Model):
     # def __str__(self):
     #     return self.user.username
     def __str__(self):
-        username = getattr(self.user, "username", "Unknown")
-        return username
+        # username = getattr(self.user, "username", "Unknown")
+        return int(self.user.username)
 
 class Home(models.Model):
     landlord=models.ForeignKey(Landlord, on_delete=models.CASCADE, null=True, blank=True, related_name="homes")
