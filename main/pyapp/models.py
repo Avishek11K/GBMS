@@ -18,7 +18,7 @@ class availablerent(models.Model):
     price=models.IntegerField()
     image=models.ImageField(upload_to='houses/')
 
-
+    
 # landlord model
 # phone/whatsapp added so roomseekers can contact the landlord directly
 # (previously the WhatsApp number was hardcoded in the templates for every house)
