@@ -34,6 +34,7 @@ def pyapp(request):
     return render(request, 'pyapp.html', context)
 # test function ends here
 
+# contact function which would be in use later,not on use 
 def contact(request):
     if request.method == "POST":
         Contact.objects.create(
@@ -45,7 +46,7 @@ def contact(request):
         messages.success(request, "Thanks for reaching out! We'll get back to you soon.")
         return redirect('contact')
     return render(request, 'contact.html')
-
+# contact function ends here
 
 def profile(request):
     rsp = RoomSeekerProfile.objects.filter(user=request.user).first()
