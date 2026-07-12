@@ -25,13 +25,14 @@ def is_roomseeker(user):
 
 # ---------- Public / general pages ----------
 
+# just a test function for the view to send the variable to template
 def pyapp(request):
     context = {
         "variable1": "Avishek",
         "variable2": "AVishek Karki"
     }
     return render(request, 'pyapp.html', context)
-
+# test function ends here
 
 def contact(request):
     if request.method == "POST":
