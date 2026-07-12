@@ -1,6 +1,7 @@
 from django.db import models
 # inbuilt model:user that is imported i.e. djnago.contrib.auth.models
 from django.contrib.auth.models import User
+# from pyapp.models import Home
 
 # Create your models here.
 class Contact(models.Model):
@@ -11,12 +12,6 @@ class Contact(models.Model):
 
     def __str__(self):
         return (self.name+" "+self.email)
-
-
-class availablerent(models.Model):
-    address=models.CharField(max_length=450)
-    price=models.IntegerField()
-    image=models.ImageField(upload_to='houses/')
 
     
 # landlord model
@@ -54,6 +49,14 @@ class Home(models.Model):
 
     def __str__(self):
         return (self.title)
+
+
+class availablerent(models.Model):
+    home=models.ForeignKey(Home, on_delete=models.CASCADE,related_name="avhome",blank=True,null=True)
+    address=models.CharField(max_length=450)
+    price=models.IntegerField()
+    image=models.ImageField(upload_to='houses/')
+
 
 
 # model homeimage created new
