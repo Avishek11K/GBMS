@@ -49,7 +49,10 @@ def contact(request):
 # contact function ends here
 
 def profile(request):
+    # rsp as relevant variable roomseekerprofile
+    # roomseekerprofile is the model where the objects ie model manager helps to interact with the model ,model manager(object) function filter helps to fetch user by requesting firstly
     rsp = RoomSeekerProfile.objects.filter(user=request.user).first()
+    # as view recieves user request. process, manages data from model and store it in variable which is passed to the template ie rsp
     return render(request, "profile.html", {"rsp": rsp})
 
 
