@@ -1,11 +1,10 @@
-/*styling for the register.css  */
+/* styling for the register.css  */
 
-.container{
+/* .container{
     display: flex;
     justify-content: space-around;
     align-items: center;
     margin:auto;
-    /* margin-left: 30%; */
     height:100vh;
     background: no-repeat;
    
@@ -15,7 +14,6 @@
     justify-content: space-around;
     align-items: center;
     margin:auto;
-    /* margin-left: 30%; */
     height:100vh;
     background: no-repeat;
 }
@@ -28,4 +26,158 @@
     height:140px;
     padding: 100px;
 
-}  
+} */
+
+/* ui register added */
+
+/* Google Font */
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap'); */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#eef4ff,#f8fafc);
+}
+
+/* Existing Container Updated */
+
+.container,
+.lcontainer{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+/* Register Card */
+
+.container form{
+    width:450px;
+    background:#fff;
+    padding:35px;
+    border-radius:18px;
+    box-shadow:0 20px 50px rgba(30,58,138,.12);
+    transition:.35s;
+}
+
+.container form:hover{
+    transform:translateY(-4px);
+    box-shadow:0 30px 60px rgba(30,58,138,.18);
+}
+
+/* Heading */
+
+.container h3{
+    text-align:center;
+    color:#1E3A8A;
+    margin-bottom:25px;
+    font-size:26px;
+    font-weight:600;
+}
+
+/* Home icon before heading */
+
+.container h3::before{
+    /* content:"🏠"; */
+    display:block;
+    font-size:40px;
+    margin-bottom:8px;
+}
+
+/* Every input */
+
+.container input,
+.container select{
+
+    width:100%;
+    padding:13px 15px;
+    margin-top:6px;
+    border:1px solid #E5E7EB;
+    border-radius:10px;
+    outline:none;
+    font-size:15px;
+    transition:.3s;
+    background:#fafafa;
+}
+
+.container input:focus,
+.container select:focus{
+
+    border-color:#1D4ED8;
+    background:white;
+    box-shadow:0 0 10px rgba(29,78,216,.18);
+
+}
+
+/* Labels */
+
+.container .forall{
+    color:#334155;
+    font-size:15px;
+    font-weight:500;
+}
+
+/* Submit Button */
+
+.submit input{
+
+    background:#1E3A8A;
+    color:white;
+    border:none;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.submit input:hover{
+
+    background:#1D4ED8;
+    transform:translateY(-2px);
+
+}
+
+/* Login */
+
+.loggedin{
+
+    text-align:center;
+    margin-top:15px;
+
+}
+
+.loggedin a{
+
+    color:#1E3A8A;
+    font-weight:600;
+    text-decoration:none;
+}
+
+.loggedin a:hover{
+
+    color:#D4A017;
+
+}
+
+/* Error */
+
+span p{
+
+    color:#DC2626;
+    font-size:13px;
+    margin-top:5px;
+
+}
+
+/* Placeholder */
+
+::placeholder{
+
+    color:#94A3B8;
+
+}
