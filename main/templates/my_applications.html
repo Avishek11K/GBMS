@@ -6,11 +6,158 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Applications</title>
     <style>
-        .wrap { margin:5% 5% 0 17%; }
+        {% comment %} .wrap { margin:5% 5% 0 17%; }
         .notif-item { display:flex; justify-content:space-between; align-items:center; gap:1rem; padding:14px 16px; border:1px solid #ddd; border-radius:8px; background:#fff; margin-bottom:12px; }
         .badge-accepted { background:#eaf3de; color:#27500a; padding:3px 10px; border-radius:20px; font-size:0.8rem; }
         .badge-declined { background:#fcebeb; color:#501313; padding:3px 10px; border-radius:20px; font-size:0.8rem; }
-        .badge-pending { background:#fdf3d8; color:#7a5b06; padding:3px 10px; border-radius:20px; font-size:0.8rem; }
+        .badge-pending { background:#fdf3d8; color:#7a5b06; padding:3px 10px; border-radius:20px; font-size:0.8rem; } {% endcomment %}
+
+        {% comment %} ui styling for myapplications {% endcomment %}
+
+        /* ---------- Global ---------- */
+
+body{
+    background:#F5F7FA;
+    font-family:'Poppins',sans-serif;
+}
+
+/* ---------- Wrapper ---------- */
+
+.wrap{
+    margin:6% 5% 40px 17%;
+}
+
+.wrap h2{
+    color:#1E3A8A;
+    font-size:30px;
+    margin-bottom:25px;
+}
+
+/* ---------- Application Card ---------- */
+
+.notif-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    padding:20px;
+    margin-bottom:18px;
+    background:#FFFFFF;
+    border:none;
+    border-radius:16px;
+    box-shadow:0 8px 22px rgba(0,0,0,.07);
+    transition:.3s;
+}
+
+.notif-item:hover{
+    transform:translateY(-4px);
+    box-shadow:0 15px 35px rgba(0,0,0,.12);
+}
+
+/* ---------- House Details ---------- */
+
+.notif-item strong{
+    color:#1E293B;
+    font-size:17px;
+}
+
+.notif-item div{
+    color:#475569;
+    line-height:1.7;
+}
+
+/* Applied Date */
+
+.notif-item div div{
+    color:#94A3B8 !important;
+    font-size:13px !important;
+}
+
+/* WhatsApp Link */
+
+.notif-item a{
+    color:#16A34A !important;
+    text-decoration:none;
+    font-weight:600;
+    transition:.3s;
+}
+
+.notif-item a:hover{
+    color:#15803D !important;
+}
+
+/* ---------- Status Badges ---------- */
+
+.badge-pending,
+.badge-accepted,
+.badge-declined{
+    display:inline-block;
+    padding:8px 16px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.badge-pending{
+    background:#FEF3C7;
+    color:#92400E;
+}
+
+.badge-accepted{
+    background:#DCFCE7;
+    color:#166534;
+}
+
+.badge-declined{
+    background:#FEE2E2;
+    color:#991B1B;
+}
+
+/* ---------- Empty State ---------- */
+
+.wrap p{
+    color:#64748B;
+    font-size:16px;
+}
+
+.wrap p a{
+    color:#2563EB;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.wrap p a:hover{
+    color:#1E3A8A;
+}
+
+/* ---------- Responsive ---------- */
+
+@media(max-width:992px){
+
+.wrap{
+    margin:100px 20px 30px;
+}
+
+.notif-item{
+    flex-direction:column;
+    align-items:flex-start;
+}
+
+}
+
+@media(max-width:600px){
+
+.notif-item{
+    padding:18px;
+}
+
+.badge-pending,
+.badge-accepted,
+.badge-declined{
+    margin-top:10px;
+}
+
+}
     </style>
 </head>
 <body>
