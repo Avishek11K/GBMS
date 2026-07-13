@@ -6,11 +6,179 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Listings</title>
     <style>
-        .house-container { display:flex; flex-wrap:wrap; gap:30px; margin:3% 5% 0 17%; }
-        .house-card { width:300px; border:1px solid #ddd; padding:15px; border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.05); background:#fff; }
-        .house-card img { width:100%; height:170px; object-fit:cover; border-radius:6px; margin-bottom:10px; }
-        .badge-avail { background:#eaf3de; color:#27500a; padding:3px 10px; border-radius:20px; font-size:0.8rem; }
-        .badge-unavail { background:#fcebeb; color:#501313; padding:3px 10px; border-radius:20px; font-size:0.8rem; }
+
+        {% comment %} styling for llhome {% endcomment %}
+       /* ---------- Global ---------- */
+
+body{
+    background:#F5F7FA;
+    font-family:'Poppins',sans-serif;
+}
+
+/* ---------- Welcome Section ---------- */
+
+.wel{
+    margin-left:17% !important;
+    margin-top:6% !important;
+    margin-bottom:20px;
+}
+
+.wel p{
+    font-size:18px;
+    color:#334155;
+    margin-bottom:15px;
+}
+
+.wel a{
+    display:inline-block;
+    background:#1E3A8A !important;
+    color:#fff !important;
+    text-decoration:none;
+    padding:12px 22px !important;
+    border-radius:10px !important;
+    font-weight:600;
+    transition:.3s;
+}
+
+.wel a:hover{
+    background:#2563EB !important;
+    transform:translateY(-2px);
+}
+
+/* ---------- House Cards ---------- */
+
+.house-container{
+    display:flex;
+    flex-wrap:wrap;
+    gap:28px;
+    margin:30px 5% 40px 17%;
+}
+
+.house-card{
+    width:320px;
+    background:#FFFFFF;
+    border:none;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    transition:.35s;
+}
+
+.house-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 40px rgba(0,0,0,.14);
+}
+
+/* ---------- Image ---------- */
+
+.house-card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+    transition:.4s;
+}
+
+.house-card:hover img{
+    transform:scale(1.05);
+}
+
+/* ---------- Content ---------- */
+
+.house-card h2{
+    margin:16px;
+    font-size:22px !important;
+    color:#1E293B;
+}
+
+.house-card p{
+    margin:10px 16px;
+    color:#475569;
+    line-height:1.5;
+}
+
+/* ---------- Status ---------- */
+
+.badge-avail,
+.badge-unavail{
+    display:inline-block;
+    margin:12px 16px;
+    padding:6px 14px;
+    border-radius:25px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.badge-avail{
+    background:#DCFCE7;
+    color:#166534;
+}
+
+.badge-unavail{
+    background:#FEE2E2;
+    color:#991B1B;
+}
+
+/* ---------- Bottom Links ---------- */
+
+.house-card p:last-child{
+    margin-top:18px;
+}
+
+.house-card p:last-child a{
+    color:#2563EB !important;
+    text-decoration:none !important;
+    font-weight:600;
+    transition:.3s;
+}
+
+.house-card p:last-child a:hover{
+    color:#1E3A8A !important;
+}
+
+/* ---------- Empty State ---------- */
+
+.house-container h2{
+    color:#64748B !important;
+    margin-bottom:15px;
+}
+
+.house-container div a{
+    color:#2563EB;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.house-container div a:hover{
+    color:#1E3A8A;
+}
+
+/* ---------- Responsive ---------- */
+
+@media(max-width:992px){
+
+.wel{
+    margin:100px 20px 20px !important;
+}
+
+.house-container{
+    margin:20px;
+    justify-content:center;
+}
+
+}
+
+@media(max-width:600px){
+
+.house-card{
+    width:100%;
+}
+
+.wel a{
+    width:100%;
+    text-align:center;
+}
+
+}
     </style>
 </head>
 <body>
