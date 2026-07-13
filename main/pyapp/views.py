@@ -177,11 +177,15 @@ def home_data(request):
 
 @login_required
 def view_details(request, pk):
+    # rs=User.groups.get(name="roomseeker")
+    # landl=User.groups.get(name="landlord")
     det = get_object_or_404(Home, pk=pk)
     already_applied = Application.objects.filter(house=det, user=request.user).exists()
     return render(request, "viewhtml.html", {
         "vd": det,
         "already_applied": already_applied,
+        # "rent":rs,
+        "is_landlord":request.user.groups.filter(name="landlord"),
     })
 
 

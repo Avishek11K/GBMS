@@ -238,9 +238,18 @@ input[type="submit"]{
         </div>
 
         <br>
-        <a href="{% url 'llhome' %}" style="background: #333; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
+       {% if is_landlord%}
+          <a href="{% url 'llhome' %}" style="background: #333; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
             Back
         </a>
+        {% else %}
+       <a href="{% url 'home.html' %}" style="background: #333; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
+            Back
+        </a>
+       {% endif %}
+       
+
+        
 
     </main>
 </body>
