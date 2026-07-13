@@ -24,7 +24,7 @@
 
 <!-- styling for CSS :JC -->
 <style>
-    .simple-about-container {
+    {% comment %} .simple-about-container {
         font-family: 'Segoe UI', Arial, sans-serif;
         max-width: 800px;
         margin: 60px auto;
@@ -52,6 +52,83 @@
         color: #444;
         margin-bottom: 20px;
         text-align: justify;
-    }
+    } {% endcomment %}
+
+    {% comment %} ui added for about {% endcomment %}
+    /* ---------- About Page ---------- */
+
+body{
+    background:#F5F7FA;
+    font-family:'Poppins',sans-serif;
+}
+
+.simple-about-container{
+    max-width:900px;
+    margin:110px auto 50px;
+    padding:40px;
+    background:#FFFFFF;
+    border-radius:18px;
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
+    transition:.35s;
+}
+
+.simple-about-container:hover{
+    transform:translateY(-4px);
+    box-shadow:0 18px 40px rgba(0,0,0,.12);
+}
+
+/* ---------- Title ---------- */
+
+.page-title{
+    font-size:36px;
+    color:#1E3A8A;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.title-line{
+    width:75px;
+    height:5px;
+    background:#D4A017;
+    border-radius:20px;
+    margin-bottom:30px;
+}
+
+/* ---------- Content ---------- */
+
+.about-content p{
+    color:#475569;
+    font-size:17px;
+    line-height:1.9;
+    text-align:justify;
+    margin-bottom:22px;
+}
+
+/* First Letter Style */
+
+.about-content p:first-child::first-letter{
+    font-size:32px;
+    font-weight:bold;
+    color:#1E3A8A;
+}
+
+/* ---------- Responsive ---------- */
+
+@media(max-width:768px){
+
+.simple-about-container{
+    margin:90px 20px 30px;
+    padding:25px;
+}
+
+.page-title{
+    font-size:30px;
+}
+
+.about-content p{
+    font-size:16px;
+}
+
+}
 </style>
 {% endblock %}
