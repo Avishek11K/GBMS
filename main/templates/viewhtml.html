@@ -6,6 +6,190 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ vd.title }} - Details</title>
+
+    {% comment %} styling for view details {% endcomment %}
+   <style>
+    /* ---------- Global ---------- */
+
+body{
+    background:#F5F7FA;
+    font-family:'Poppins',sans-serif;
+    margin:0;
+    padding:0;
+}
+
+/* ---------- Main ---------- */
+
+main{
+    max-width:900px !important;
+    margin:90px auto 40px !important;
+    padding:35px !important;
+    background:#FFFFFF;
+    border-radius:18px;
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
+}
+
+/* ---------- Heading ---------- */
+
+h1{
+    color:#1E3A8A;
+    margin-bottom:10px;
+    font-size:34px;
+}
+
+hr{
+    border:none;
+    height:2px;
+    background:#E5E7EB;
+    margin-bottom:30px;
+}
+
+/* ---------- Image ---------- */
+
+.detail-container img{
+    width:100% !important;
+    height:450px;
+    object-fit:cover;
+    border-radius:15px !important;
+    margin-bottom:25px;
+    box-shadow:0 8px 20px rgba(0,0,0,.10);
+}
+
+/* ---------- Information ---------- */
+
+.detail-container p{
+    font-size:17px;
+    color:#475569;
+    line-height:1.8;
+    margin-bottom:15px;
+}
+
+.detail-container strong{
+    color:#1E293B;
+}
+
+/* ---------- Contact Section ---------- */
+
+h3{
+    color:#1E3A8A;
+    margin-bottom:18px;
+}
+
+.detail-container a{
+    transition:.3s;
+}
+
+/* WhatsApp */
+
+.detail-container a[href*="wa.me"]{
+    background:#DCFCE7 !important;
+    border:2px solid #22C55E !important;
+    color:#166534;
+    padding:12px 18px !important;
+    border-radius:10px !important;
+    text-decoration:none !important;
+    font-weight:600;
+    display:inline-block;
+    margin-bottom:10px;
+}
+
+.detail-container a[href*="wa.me"]:hover{
+    background:#22C55E !important;
+    color:white !important;
+}
+
+/* Call */
+
+.detail-container a[href^="tel"]{
+    background:#EFF6FF;
+    border:2px solid #2563EB !important;
+    color:#1E3A8A;
+    padding:12px 18px !important;
+    border-radius:10px !important;
+    text-decoration:none !important;
+    font-weight:600;
+    display:inline-block;
+}
+
+.detail-container a[href^="tel"]:hover{
+    background:#2563EB;
+    color:white !important;
+}
+
+/* ---------- Apply Button ---------- */
+
+input[type="submit"]{
+    background:#1E3A8A !important;
+    color:white !important;
+    border:none !important;
+    padding:14px 30px !important;
+    border-radius:10px !important;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+input[type="submit"]:hover{
+    background:#2563EB !important;
+    transform:translateY(-2px);
+}
+
+/* ---------- Applied Badge ---------- */
+
+.detail-container span{
+    display:inline-block;
+    background:#DCFCE7 !important;
+    color:#166534 !important;
+    padding:12px 18px !important;
+    border-radius:10px !important;
+    font-weight:600;
+}
+
+/* ---------- Back Button ---------- */
+
+body > main > a{
+    display:inline-block;
+    margin-top:25px;
+    background:#1E3A8A !important;
+    color:white !important;
+    text-decoration:none;
+    padding:12px 22px !important;
+    border-radius:10px !important;
+    transition:.3s;
+}
+
+body > main > a:hover{
+    background:#2563EB !important;
+}
+
+/* ---------- Responsive ---------- */
+
+@media(max-width:768px){
+
+main{
+    margin:90px 15px 30px !important;
+    padding:25px !important;
+}
+
+.detail-container img{
+    height:250px;
+}
+
+.detail-container a[href*="wa.me"],
+.detail-container a[href^="tel"]{
+    display:block;
+    width:100%;
+    text-align:center;
+    margin-bottom:12px;
+}
+
+input[type="submit"]{
+    width:100%;
+}
+
+}
+   </style>
 </head>
 <body>
     <main style="padding: 80px; max-width: 800px; margin:0 auto;">
