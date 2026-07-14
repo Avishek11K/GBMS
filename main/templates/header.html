@@ -351,9 +351,13 @@ nav{
             <a href="{%url 'profile'%}">
                 <img class="notification" id="contact" src="https://cdn-icons-png.flaticon.com/128/8143/8143259.png" alt="">
             </a>
-            <a href="{% url 'my_applications' %}">
+            {% comment %} <a href="{% url 'my_applications' %}">
                 <img class="notification" src="https://cdn-icons-png.flaticon.com/128/5636/5636698.png" alt="My applications">
-            </a>
+            </a> {% endcomment %}
+             <a href="{% url 'notify' %}" style="position:relative;">
+            <img class="notification" src="https://cdn-icons-png.flaticon.com/128/3602/3602145.png" alt="Notifications">
+            {% if pending_count %}<span class="notif-badge">{{ pending_count }}</span>{% endif %}
+        </a>
         </nav>
         </div>
     </header>
