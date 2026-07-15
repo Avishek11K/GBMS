@@ -199,6 +199,18 @@ def view_details(request, pk):
         "is_landlord":request.user.groups.filter(name="landlord"),
     })
 
+@login_required
+def home(request):
+    homes = Home.objects.all()
+
+    notify_count = Application.objects.filter(
+        user=request.user
+    ).exclude(status='pending').count()
+
+    return render(request, "home.html", {
+        "homefetch": homes,
+        "notify_count": notify_count,
+    })
 
 @login_required
 def process_apply(request, pk):
