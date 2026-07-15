@@ -1,0 +1,34 @@
+<h2>Notifications</h2>
+
+{% for app in notifications %}
+
+<div class="notif-item">
+
+    {% if app.status == "accepted" %}
+        <span class="badge-accepted">
+            ✅ Your application for
+            <strong>{{ app.house.title }}</strong>
+            has been accepted.
+        </span>
+
+    {% else %}
+
+        <span class="badge-declined">
+            ❌ Your application for
+            <strong>{{ app.house.title }}</strong>
+            has been declined.
+        </span>
+
+    {% endif %}
+
+    <div>
+        {{ app.applied_at|date:"M d, Y g:i A" }}
+    </div>
+
+</div>
+
+{% empty %}
+
+<p>No notifications.</p>
+
+{% endfor %}
