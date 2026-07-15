@@ -24,4 +24,9 @@ urlpatterns = [
     path("notify", views.notify, name="notify"),
     path("application/<int:pk>/<str:status>/", views.update_application_status, name="update_application_status"),
     path("llprofile", views.llprofile, name="llprofile"),
+    path(
+    "rs_notifications/",
+    views.rs_notifications,
+    name="rs_notifications"
+)
 ]
