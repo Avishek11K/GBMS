@@ -254,7 +254,6 @@ def llhome(request):
         'pending_count': pending_count,
     })
 
-
 @login_required
 def notify(request):
     """Landlord's notifications page: applications on their houses, Accept/Decline."""
