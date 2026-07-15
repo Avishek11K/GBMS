@@ -59,6 +59,17 @@ def profile(request):
 def about(request):
     return render(request, 'about.html')
 
+# roomseeker notification view
+@login_required
+def rs_notifications(request):
+    notifications = Application.objects.filter(
+        user=request.user
+    ).exclude(status='pending').order_by('-applied_at')
+
+    return render(request, "rs_notifications.html", {
+        "notifications": notifications
+    })
+
 
 # ---------- Register / Login / Logout ----------
 
