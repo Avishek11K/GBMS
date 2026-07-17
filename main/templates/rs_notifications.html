@@ -1,0 +1,227 @@
+
+{% comment %} aba roomseeker ko laagi ni estaii styling haala banau,,restructure gara {% endcomment %}
+
+{% comment %} {% include "header.html" %}
+
+<h2>Notifications</h2>
+
+{% for app in notifications %}
+
+<div class="notif-item">
+
+    {% if app.status == "accepted" %}
+        <span class="badge-accepted">
+            ✅ Your application for
+            <strong>{{ app.house.title }}</strong>
+            has been accepted.
+        </span>
+
+    {% else %}
+
+        <span class="badge-declined">
+            ❌ Your application for
+            <strong>{{ app.house.title }}</strong>
+            has been declined.
+        </span>
+
+    {% endif %}
+
+    <div>
+        {{ app.applied_at|date:"M d, Y g:i A" }}
+    </div>
+
+</div>
+
+{% empty %}
+
+<p>No notifications.</p>
+
+{% endfor %} {% endcomment %}
+
+
+
+{% comment %} added ui styling for rs notf {% endcomment %}
+{% include "header.html" %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+
+    <style>
+
+        body{
+            background:#F5F7FA;
+            font-family:'Poppins',sans-serif;
+        }
+
+        .wrap{
+            max-width:900px;
+            margin:100px auto 40px;
+            padding:0 20px;
+        }
+
+        .page-title{
+            font-size:32px;
+            color:#1E3A8A;
+            margin-bottom:8px;
+        }
+
+        .page-subtitle{
+            color:#666;
+            margin-bottom:30px;
+        }
+
+        .notif-item{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:20px;
+
+            background:#fff;
+            border-radius:12px;
+            padding:20px;
+
+            margin-bottom:18px;
+
+            box-shadow:0 8px 22px rgba(0,0,0,.08);
+            border-left:6px solid #2563EB;
+
+            transition:.3s;
+        }
+
+        .notif-item:hover{
+            transform:translateY(-3px);
+            box-shadow:0 12px 28px rgba(0,0,0,.12);
+        }
+
+        .notif-text{
+            font-size:16px;
+            color:#333;
+            line-height:1.7;
+        }
+
+        .time{
+            margin-top:8px;
+            color:#888;
+            font-size:14px;
+        }
+
+        .badge-accepted,
+        .badge-declined{
+
+            padding:8px 18px;
+            border-radius:30px;
+            font-weight:600;
+            font-size:14px;
+
+        }
+
+        .badge-accepted{
+            background:#E6F7ED;
+            color:#1E7E34;
+        }
+
+        .badge-declined{
+            background:#FDECEC;
+            color:#C62828;
+        }
+
+        .empty-box{
+
+            background:#fff;
+            padding:40px;
+            border-radius:12px;
+            text-align:center;
+            color:#777;
+
+            box-shadow:0 8px 22px rgba(0,0,0,.08);
+
+        }
+
+        @media(max-width:768px){
+
+            .wrap{
+                margin-top:90px;
+            }
+
+            .notif-item{
+                flex-direction:column;
+                align-items:flex-start;
+            }
+
+            .page-title{
+                font-size:26px;
+            }
+
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div class="wrap">
+
+    <h1 class="page-title">Notifications</h1>
+    <p class="page-subtitle">
+        Here you can see updates about your house applications.
+    </p>
+
+    {% for app in notifications %}
+
+    <div class="notif-item">
+
+        <div class="notif-text">
+
+            {% if app.status == "accepted" %}
+
+                <span class="badge-accepted">
+                    ✅ Accepted
+                </span>
+
+                <p style="margin-top:12px;">
+                    Your application for
+                    <strong>{{ app.house.title }}</strong>
+                    has been accepted by the landlord.
+                </p>
+
+            {% else %}
+
+                <span class="badge-declined">
+                    ❌ Declined
+                </span>
+
+                <p style="margin-top:12px;">
+                    Your application for
+                    <strong>{{ app.house.title }}</strong>
+                    has been declined.
+                </p>
+
+            {% endif %}
+
+            <div class="time">
+                {{ app.applied_at|date:"M d, Y • g:i A" }}
+            </div>
+
+        </div>
+
+    </div>
+
+    {% empty %}
+
+    <div class="empty-box">
+
+        <h3>No notifications yet.</h3>
+        <p>Updates about your applications will appear here.</p>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+</body>
+</html>

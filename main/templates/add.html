@@ -1,0 +1,164 @@
+{% include "llheader.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add House</title>
+    <style>
+        {% comment %} .first{
+           width: 400px;
+           border: 4px solid #eee;
+           padding: 40px;
+           border-radius: 15px;
+           margin: 6% auto;
+        }
+        .first input, .first textarea { width:100%; padding:8px; margin-bottom:12px; border:1px solid #ccc; border-radius:6px; box-sizing:border-box; }
+        .first input[type=submit] { background:#1a7a5e; color:#fff; border:none; cursor:pointer; font-weight:bold; padding:10px; } {% endcomment %}
+
+        {% comment %} ui added styling add {% endcomment %}
+
+        /* ---------- Global ---------- */
+
+body{
+    background:#F5F7FA;
+    font-family:'Poppins',sans-serif;
+}
+
+/* ---------- Form Container ---------- */
+
+.first{
+    width:500px;
+    background:#FFFFFF;
+    margin:110px auto 40px;
+    padding:35px;
+    border:none;
+    border-radius:18px;
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+    transition:.35s;
+}
+
+.first:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 45px rgba(0,0,0,.12);
+}
+
+/* ---------- Heading ---------- */
+
+.first h2{
+    text-align:center;
+    color:#1E3A8A;
+    font-size:28px;
+    margin-bottom:30px;
+}
+
+/* ---------- Labels ---------- */
+
+.first form{
+    color:#334155;
+    font-weight:500;
+    line-height:1.8;
+}
+
+/* ---------- Inputs ---------- */
+
+.first input,
+.first textarea{
+    width:100%;
+    padding:12px 15px;
+    margin-top:6px;
+    margin-bottom:18px;
+    border:1px solid #D1D5DB;
+    border-radius:10px;
+    background:#FAFAFA;
+    font-size:15px;
+    outline:none;
+    transition:.3s;
+    box-sizing:border-box;
+}
+
+.first textarea{
+    resize:vertical;
+    min-height:120px;
+}
+
+/* ---------- Focus ---------- */
+
+.first input:focus,
+.first textarea:focus{
+    border-color:#2563EB;
+    background:#FFFFFF;
+    box-shadow:0 0 10px rgba(37,99,235,.15);
+}
+
+/* ---------- File Upload ---------- */
+
+.first input[type="file"]{
+    background:#fff;
+    padding:10px;
+    cursor:pointer;
+}
+
+/* ---------- Submit Button ---------- */
+
+.first input[type="submit"]{
+    background:#1E3A8A;
+    color:#FFFFFF;
+    border:none;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+    padding:14px;
+}
+
+.first input[type="submit"]:hover{
+    background:#2563EB;
+    transform:translateY(-2px);
+}
+
+/* ---------- Placeholder ---------- */
+
+::placeholder{
+    color:#94A3B8;
+}
+
+/* ---------- Responsive ---------- */
+
+@media(max-width:768px){
+
+.first{
+    width:95%;
+    margin:95px auto 30px;
+    padding:25px;
+}
+
+.first h2{
+    font-size:24px;
+}
+
+}
+    </style>
+</head>
+<body>
+   <main>
+    <div class="first">
+        <h2>Add a new house listing</h2>
+        <form action="" enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            Title: <br>
+            <input type="text" name="title" placeholder="Enter the title" required>
+            Location: <br>
+            <input type="text" name="location" placeholder="Enter the Location" required>
+            Price (Rs./month): <br>
+            <input type="number" name="price" placeholder="Enter the price" required>
+            Description: <br>
+            <textarea name="desc" placeholder="Enter the rent/house descriptions" rows="4"></textarea>
+            Photos: <br>
+            <input type="file" name="image" multiple>
+            <input type="submit" name="save" value="Add House">
+        </form>
+    </div>
+   </main>
+</body>
+</html>

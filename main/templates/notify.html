@@ -1,0 +1,230 @@
+{% include "llheader.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+    <style>
+        {% comment %} .wrap { margin:5% 5% 0 17%; }
+        .notif-item { display:flex; justify-content:space-between; align-items:center; gap:1rem; padding:14px 16px; border:1px solid #ddd; border-radius:8px; background:#fff; margin-bottom:12px; }
+        .notif-item.pending { background:#fffaf0; }
+        .notif-text .time { font-size:0.8rem; color:#888; }
+        .actions button { padding:6px 14px; border-radius:6px; border:none; cursor:pointer; font-weight:bold; margin-left:6px; }
+        .btn-accept { background:#1a7a5e; color:#fff; }
+        .btn-decline { background:#c0392b; color:#fff; }
+        .badge-accepted { background:#eaf3de; color:#27500a; padding:3px 10px; border-radius:20px; font-size:0.8rem; }
+        .badge-declined { background:#fcebeb; color:#501313; padding:3px 10px; border-radius:20px; font-size:0.8rem; }
+        .badge-pending { background:#fdf3d8; color:#7a5b06; padding:3px 10px; border-radius:20px; font-size:0.8rem; } {% endcomment %}
+
+        {% comment %} ui added for notify {% endcomment %}
+
+        /* ---------- Global ---------- */
+
+body{
+    background:#F5F7FA;
+    font-family:'Poppins',sans-serif;
+}
+
+/* ---------- Wrapper ---------- */
+
+.wrap{
+    margin:6% 5% 40px 17%;
+}
+
+.wrap h2{
+    color:#1E3A8A;
+    font-size:30px;
+    margin-bottom:8px;
+}
+
+.wrap p{
+    color:#64748B;
+    margin-bottom:25px;
+}
+
+/* ---------- Notification Card ---------- */
+
+.notif-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    padding:20px;
+    margin-bottom:18px;
+    background:#fff;
+    border:none;
+    border-radius:16px;
+    box-shadow:0 8px 22px rgba(0,0,0,.07);
+    transition:.3s;
+}
+
+.notif-item:hover{
+    transform:translateY(-4px);
+    box-shadow:0 15px 35px rgba(0,0,0,.12);
+}
+
+/* Pending Card */
+
+.notif-item.pending{
+    border-left:5px solid #F59E0B;
+}
+
+/* ---------- Text ---------- */
+
+.notif-text{
+    color:#334155;
+    line-height:1.6;
+}
+
+.notif-text strong{
+    color:#1E293B;
+}
+
+.notif-text .time{
+    margin-top:6px;
+    font-size:13px;
+    color:#94A3B8;
+}
+
+/* ---------- Action Buttons ---------- */
+
+.actions{
+    display:flex;
+    gap:10px;
+}
+
+.actions button{
+    padding:10px 18px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+}
+
+/* Accept */
+
+.btn-accept{
+    background:#16A34A;
+    color:#fff;
+}
+
+.btn-accept:hover{
+    background:#15803D;
+}
+
+/* Decline */
+
+.btn-decline{
+    background:#DC2626;
+    color:#fff;
+}
+
+.btn-decline:hover{
+    background:#B91C1C;
+}
+
+/* ---------- Status Badges ---------- */
+
+.badge-accepted,
+.badge-declined,
+.badge-pending{
+    padding:8px 16px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.badge-accepted{
+    background:#DCFCE7;
+    color:#166534;
+}
+
+.badge-declined{
+    background:#FEE2E2;
+    color:#991B1B;
+}
+
+.badge-pending{
+    background:#FEF3C7;
+    color:#92400E;
+}
+
+/* ---------- Empty ---------- */
+
+.wrap p:last-child{
+    font-size:16px;
+}
+
+/* ---------- Responsive ---------- */
+
+@media(max-width:992px){
+
+.wrap{
+    margin:110px 20px 30px;
+}
+
+.notif-item{
+    flex-direction:column;
+    align-items:flex-start;
+}
+
+.actions{
+    width:100%;
+}
+
+.actions button{
+    flex:1;
+}
+
+}
+
+@media(max-width:600px){
+
+.actions{
+    flex-direction:column;
+}
+
+.actions button{
+    width:100%;
+}
+
+}
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <h2>Notifications</h2>
+    <p style="color:#666;">Roomseekers who applied for your houses show up here — accept or decline each application.</p>
+
+    {% for app in applications %}
+        <div class="notif-item {% if app.status == 'pending' %}pending{% endif %}">
+            <div class="notif-text">
+                <strong>{{ app.user.username }}</strong> applied for "<strong>{{ app.house.title }}</strong>"
+                <div class="time">{{ app.applied_at|date:"M d, Y - g:i A" }}</div>
+            </div>
+
+            {% if app.status == 'pending' %}
+                <div class="actions">
+                    <form method="post" action="{% url 'update_application_status' app.pk 'accepted' %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-accept">Accept</button>
+                    </form>
+                    <form method="post" action="{% url 'update_application_status' app.pk 'declined' %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-decline">Decline</button>
+                    </form>
+                </div>
+            {% elif app.status == 'accepted' %}
+                <span class="badge-accepted">Accepted</span>
+            {% else %}
+                <span class="badge-declined">Declined</span>
+            {% endif %}
+        </div>
+    {% empty %}
+        <p style="color:#888;">No applications yet.</p>
+    {% endfor %}
+</div>
+</body>
+</html>

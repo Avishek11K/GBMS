@@ -1,0 +1,218 @@
+{% include "llheader.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Listings</title>
+    <style>
+
+        {% comment %} styling for llhome {% endcomment %}
+       /* ---------- Global ---------- */
+
+body{
+    background:#F5F7FA;
+    font-family:'Poppins',sans-serif;
+}
+
+/* ---------- Welcome Section ---------- */
+
+.wel{
+    margin-left:17% !important;
+    margin-top:6% !important;
+    margin-bottom:20px;
+}
+
+.wel p{
+    font-size:18px;
+    color:#334155;
+    margin-bottom:15px;
+}
+
+.wel a{
+    display:inline-block;
+    background:#1E3A8A !important;
+    color:#fff !important;
+    text-decoration:none;
+    padding:12px 22px !important;
+    border-radius:10px !important;
+    font-weight:600;
+    transition:.3s;
+}
+
+.wel a:hover{
+    background:#2563EB !important;
+    transform:translateY(-2px);
+}
+
+/* ---------- House Cards ---------- */
+
+.house-container{
+    display:flex;
+    flex-wrap:wrap;
+    gap:28px;
+    margin:30px 5% 40px 17%;
+}
+
+.house-card{
+    width:320px;
+    background:#FFFFFF;
+    border:none;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    transition:.35s;
+}
+
+.house-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 40px rgba(0,0,0,.14);
+}
+
+/* ---------- Image ---------- */
+
+.house-card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+    transition:.4s;
+}
+
+.house-card:hover img{
+    transform:scale(1.05);
+}
+
+/* ---------- Content ---------- */
+
+.house-card h2{
+    margin:16px;
+    font-size:22px !important;
+    color:#1E293B;
+}
+
+.house-card p{
+    margin:10px 16px;
+    color:#475569;
+    line-height:1.5;
+}
+
+/* ---------- Status ---------- */
+
+.badge-avail,
+.badge-unavail{
+    display:inline-block;
+    margin:12px 16px;
+    padding:6px 14px;
+    border-radius:25px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.badge-avail{
+    background:#DCFCE7;
+    color:#166534;
+}
+
+.badge-unavail{
+    background:#FEE2E2;
+    color:#991B1B;
+}
+
+/* ---------- Bottom Links ---------- */
+
+.house-card p:last-child{
+    margin-top:18px;
+}
+
+.house-card p:last-child a{
+    color:#2563EB !important;
+    text-decoration:none !important;
+    font-weight:600;
+    transition:.3s;
+}
+
+.house-card p:last-child a:hover{
+    color:#1E3A8A !important;
+}
+
+/* ---------- Empty State ---------- */
+
+.house-container h2{
+    color:#64748B !important;
+    margin-bottom:15px;
+}
+
+.house-container div a{
+    color:#2563EB;
+    text-decoration:none;
+    font-weight:600;
+}
+
+.house-container div a:hover{
+    color:#1E3A8A;
+}
+
+/* ---------- Responsive ---------- */
+
+@media(max-width:992px){
+
+.wel{
+    margin:100px 20px 20px !important;
+}
+
+.house-container{
+    margin:20px;
+    justify-content:center;
+}
+
+}
+
+@media(max-width:600px){
+
+.house-card{
+    width:100%;
+}
+
+.wel a{
+    width:100%;
+    text-align:center;
+}
+
+}
+    </style>
+</head>
+<body>
+    <div class="wel" style="margin-left:17%; margin-top:5%;">
+        <p>Welcome, <strong>{{ user.username }}</strong> — here are your listings.</p>
+        <a href="{% url 'add.html' %}" style="background:#1a7a5e; color:#fff; padding:8px 16px; border-radius:6px; text-decoration:none;">+ Add a house</a>
+    </div>
+
+    <div class="house-container">
+    {% for house in homefetch %}
+        <div class="house-card">
+            {% if house.images.first %}
+                <img src="{{ house.images.first.image.url }}" alt="{{ house.title }}">
+            {% endif %}
+            <h2 style="font-size:1.2rem;">{{ house.title }}</h2>
+            <p><strong>Location:</strong> {{ house.location }}</p>
+            <p><strong>Price:</strong> Rs {{ house.price }}</p>
+            {% if house.is_available %}
+                <span class="badge-avail">Available</span>
+            {% else %}
+                <span class="badge-unavail">Unavailable</span>
+            {% endif %}
+            <p style="margin-top:10px;">
+                <a href="{% url 'view_details' house.id %}" style="color:#007bff; text-decoration:none; font-weight:bold;">View</a>
+                &nbsp;|&nbsp;
+                <a href="{% url 'notify' %}" style="color:#007bff; text-decoration:none; font-weight:bold;">Applicants ({{ house.applications.count }})</a>
+            </p>
+        </div>
+    {% empty %}
+        <div style="text-align:center; width:100%; padding:50px;">
+            <h2 style="color:#555;">You haven't added any houses yet.</h2>
+            <a href="{% url 'add.html' %}">Add your first house</a>
+        </div>
+    {% endfor %}
+    </div>
+</body>
+</html>

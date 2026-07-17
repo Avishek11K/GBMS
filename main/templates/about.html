@@ -1,0 +1,134 @@
+{% block content %}
+<!--inheriting the header.html into about.html JC -->
+{% include "header.html" %}
+<div class="simple-about-container">
+    
+    <h1 class="page-title">About Us</h1>
+    <div class="title-line"></div>
+
+    <div class="about-content">
+        <p>
+            Welcome to our Gharbhanda Management System. This platform is designed to provide a simple and efficient way for users to find available rooms or houses for rent. Our main goal is to connect house owners (Landlords) directly with people looking for accommodations (Roomseekers) without any middleman.
+        </p>
+
+        <p>
+            Through this system, roomseekers can search for available properties in their desired areas and apply for them with a simple click. On the other hand, landlords can easily post details about their properties, view incoming rental requests, and manage their listings from a single dashboard.
+        </p>
+
+        <p>
+            This website is developed as a web-based project to solve the real-world problem of finding rental spaces easily and securely. We are continuously working to keep the system user-friendly and reliable for everyone.
+        </p>
+    </div>
+
+</div>
+
+<!-- styling for CSS :JC -->
+<style>
+    {% comment %} .simple-about-container {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        max-width: 800px;
+        margin: 60px auto;
+        padding: 0 20px;
+        line-height: 1.8;
+    }
+
+    .page-title {
+        font-size: 2.2rem;
+        color: #222;
+        margin-bottom: 10px;
+        text-align: left;
+    }
+
+    
+    .title-line {
+        width: 60px;
+        height: 4px;
+        background-color: #007bff;
+        margin-bottom: 30px;
+    }
+
+    .about-content p {
+        font-size: 1.05rem;
+        color: #444;
+        margin-bottom: 20px;
+        text-align: justify;
+    } {% endcomment %}
+
+    {% comment %} ui added for about {% endcomment %}
+    /* ---------- About Page ---------- */
+
+body{
+    background:#F5F7FA;
+    font-family:'Poppins',sans-serif;
+}
+
+.simple-about-container{
+    max-width:900px;
+    margin:110px auto 50px;
+    padding:40px;
+    background:#FFFFFF;
+    border-radius:18px;
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
+    transition:.35s;
+}
+
+.simple-about-container:hover{
+    transform:translateY(-4px);
+    box-shadow:0 18px 40px rgba(0,0,0,.12);
+}
+
+/* ---------- Title ---------- */
+
+.page-title{
+    font-size:36px;
+    color:#1E3A8A;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.title-line{
+    width:75px;
+    height:5px;
+    background:#D4A017;
+    border-radius:20px;
+    margin-bottom:30px;
+}
+
+/* ---------- Content ---------- */
+
+.about-content p{
+    color:#475569;
+    font-size:17px;
+    line-height:1.9;
+    text-align:justify;
+    margin-bottom:22px;
+}
+
+/* First Letter Style */
+
+.about-content p:first-child::first-letter{
+    font-size:32px;
+    font-weight:bold;
+    color:#1E3A8A;
+}
+
+/* ---------- Responsive ---------- */
+
+@media(max-width:768px){
+
+.simple-about-container{
+    margin:90px 20px 30px;
+    padding:25px;
+}
+
+.page-title{
+    font-size:30px;
+}
+
+.about-content p{
+    font-size:16px;
+}
+
+}
+</style>
+{% endblock %}
