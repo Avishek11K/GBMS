@@ -59,17 +59,32 @@ def profile(request):
 def about(request):
     return render(request, 'about.html')
 
-# roomseeker notification view
+
+@login_required
+def home(request):
+    homes = Home.objects.all()
+
+    notify_count = Application.objects.filter(
+        user=request.user
+    ).exclude(status='pending').count()
+
+    return render(request, "home.html", {
+        "homefetch": homes,
+        "notify_count": notify_count,
+    })
+
 @login_required
 def rs_notifications(request):
     notifications = Application.objects.filter(
         user=request.user
     ).exclude(status='pending').order_by('-applied_at')
 
-    return render(request, "rs_notifications.html", {
-        "notifications": notifications
-    })
+    notify_count = notifications.count()
 
+    return render(request, "rs_notifications.html", {
+        "notifications": notifications,
+        "notify_count": notify_count,
+    })
 
 # ---------- Register / Login / Logout ----------
 
@@ -199,18 +214,18 @@ def view_details(request, pk):
         "is_landlord":request.user.groups.filter(name="landlord"),
     })
 
-@login_required
-def home(request):
-    homes = Home.objects.all()
+# @login_required
+# def home(request):
+#     homes = Home.objects.all()
 
-    notify_count = Application.objects.filter(
-        user=request.user
-    ).exclude(status='pending').count()
+#     notify_count = Application.objects.filter(
+#         user=request.user
+#     ).exclude(status='pending').count()
 
-    return render(request, "home.html", {
-        "homefetch": homes,
-        "notify_count": notify_count,
-    })
+#     return render(request, "home.html", {
+#         "homefetch": homes,
+#         "notify_count": notify_count,
+#     })
 
 @login_required
 def process_apply(request, pk):
@@ -233,7 +248,7 @@ def process_apply(request, pk):
 def my_applications(request):
     """Roomseeker's own 'notifications' page: status of everything they've applied for."""
     applications = Application.objects.filter(user=request.user).select_related('house', 'house__landlord__user')
-    applications.filter(seeker_read=False).update(seeker_read=True)
+    applications.filter(roomseeker_read=False).update(roomseeker_read=True)
     return render(request, 'my_applications.html', {'applications': applications})
 
 
