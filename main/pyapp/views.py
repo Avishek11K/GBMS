@@ -312,7 +312,13 @@ def update_application_status(request, pk, status):
         messages.success(request, f"Application {status}.")
     return redirect('notify')
 
-
+# def rsupdate_application_status(request, pk, status):
+#     application = get_object_or_404(Application, pk=pk, user=request.user)
+#     if status in ['accepted', 'declined', 'pending']:
+#         application.status = status
+#         application.save()
+#         messages.success(request, f"Application {status}.")
+#     return redirect('my_applications')
 @login_required
 def llprofile(request):
     ll = landlord.objects.get(user=request.user)
@@ -350,3 +356,21 @@ def delete_home(request,pk):
         return redirect("llhome")
     return render(request,"delete_home.html",{"home":home})
 
+def cancel_application(request,pk):
+    application=get_object_or_404(Application, pk=pk, user=request.user)
+    if application.status=="pending":
+        application.delete()
+        messages.success(request,"Application cancelled successfully")
+    else:
+        messages.error(request,"Cannot cancel application that has been processed.")
+    return redirect("my_applications")
+
+def ll_cancel_application(request,pk):
+    ll=landlord.objects.get(user=request.user)
+    application=get_object_or_404(Application,pk=pk,house__landlord=ll)
+    if application.status=="pending":
+        application.delete()
+        messages.success(request,"Application cancelled successfully")
+    else:
+        messages.error(request,"Cannot cancel application that has been processed.")
+    return redirect("llapplications")
