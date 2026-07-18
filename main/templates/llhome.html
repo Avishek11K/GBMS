@@ -202,13 +202,13 @@ body{
                 <span class="badge-unavail">Unavailable</span>
             {% endif %}
             <p style="margin-top:10px;">
-    <a href="{% url 'view_details' home.id %}" style="color:#007bff; text-decoration:none; font-weight:bold;">View</a>
+    <a href="{% url 'view_details' house.id %}" style="color:#007bff; text-decoration:none; font-weight:bold;">View</a>
     &nbsp;|&nbsp;
-    <a href="{% url 'notify' %}" style="color:#007bff; text-decoration:none; font-weight:bold;">Applicants ({{ home.applications.count }})</a>
+    <a href="{% url 'notify' %}" style="color:#007bff; text-decoration:none; font-weight:bold;">Applicants ({{ house.applications.count }})</a>
     &nbsp;|&nbsp;
-    <a href="{% url 'edit_house' home.id %}" style="color:#007bff; text-decoration:none; font-weight:bold;">Edit</a>
+    <a href="{% url 'edit_home' house.id %}" style="color:#007bff; text-decoration:none; font-weight:bold;">Edit</a>
     &nbsp;|&nbsp;
-    <a href="{% url 'delete_house' home.id %}" style="color:#c0392b; text-decoration:none; font-weight:bold;">Delete</a>
+    <a href="{% url 'delete_home' house.id %}" style="color:#c0392b; text-decoration:none; font-weight:bold;">Delete</a>
 </p>
         </div>
     {% empty %}
