@@ -253,7 +253,7 @@ def add(request):
         return redirect("llhome")
     return render(request, "add.html")
 
-
+# notification count for landlord and roomseeker
 @login_required
 def llhome(request):
     """Landlord's own listings page."""
@@ -272,7 +272,28 @@ def notify(request):
     applications = Application.objects.filter(house__landlord=ll).select_related('user', 'house')
     applications.filter(landlord_read=False).update(landlord_read=True)
     return render(request, 'notify.html', {'applications': applications})
+@login_required
+def home(request):
+    homes = Home.objects.all()
+    notify_count = Application.objects.filter(
+        user=request.user
+    ).exclude(status='pending').filter(roomseeker_read=False).count()
+    return render(request, "home.html", {
+        "homefetch": homes,
+        "notify_count": notify_count,
+    })
 
+@login_required
+def rs_notifications(request):
+    notifications = Application.objects.filter(
+        user=request.user
+    ).exclude(status='pending').order_by('-applied_at').select_related('house', 'house__landlord__user')
+    notifications.filter(roomseeker_read=False).update(roomseeker_read=True)
+    return render(request, "rs_notifications.html", {
+        "notifications": notifications
+    })
+
+# notification end for landlord and roomseeker
 
 @login_required
 def update_application_status(request, pk, status):
