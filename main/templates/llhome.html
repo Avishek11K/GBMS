@@ -202,23 +202,14 @@ body{
                 <span class="badge-unavail">Unavailable</span>
             {% endif %}
             <p style="margin-top:10px;">
-                <a href="{% url 'view_details' house.id %}" style="color:#007bff; text-decoration:none; font-weight:bold;">View</a>
-                &nbsp;|&nbsp;
-                <a href="{% url 'llapplications' %}" style="color:#007bff; text-decoration:none; font-weight:bold;">Applicants ({{ house.applications.count }})</a>
-                {% comment %} |&nbsp;
-                 <div style="margin-top:25px;">
-                {% if already_applied %}
-                    <span style="background:#dbeee7; color:#14614a; padding:8px 14px; border-radius:6px;">You have already applied for this house.</span>
-                {% else %}
-                    <form action="{% url 'process_apply' vd.id %}" method="POST" style="display:inline;">
-                        {% csrf_token %}
-                        <input type="submit" name="apply" value="Apply now"
-                               style="cursor:pointer; background:#1a7a5e; color:#fff; border:none; padding:10px 20px; border-radius:6px; font-weight:bold;"
-                               onclick="return confirm('Are you sure to apply?');">
-                    </form>
-                {% endif %}
-            </div> {% endcomment %}
-            </p>
+    <a href="{% url 'view_details' home.id %}" style="color:#007bff; text-decoration:none; font-weight:bold;">View</a>
+    &nbsp;|&nbsp;
+    <a href="{% url 'notify' %}" style="color:#007bff; text-decoration:none; font-weight:bold;">Applicants ({{ home.applications.count }})</a>
+    &nbsp;|&nbsp;
+    <a href="{% url 'edit_house' home.id %}" style="color:#007bff; text-decoration:none; font-weight:bold;">Edit</a>
+    &nbsp;|&nbsp;
+    <a href="{% url 'delete_house' home.id %}" style="color:#c0392b; text-decoration:none; font-weight:bold;">Delete</a>
+</p>
         </div>
     {% empty %}
         <div style="text-align:center; width:100%; padding:50px;">

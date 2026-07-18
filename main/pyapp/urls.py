@@ -30,4 +30,6 @@ urlpatterns = [
     name="rs_notifications"
     ),
     path("llapplications",views.llapplications,name="llapplications"),
+    path("llhome/<int:pk>/edit/",views.edit_home,name="edit_home"),
+    path("llhome/<int:pk>/delete/",views.delete_home,name="delete_home")
 ]

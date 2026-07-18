@@ -1,0 +1,25 @@
+{% include "llheader.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete House</title>
+    <link rel="stylesheet" href="{% static 'css/gharbhanda.css' %}">
+</head>
+<body>
+    <div style="max-width:480px; margin:80px auto; text-align:center; padding:30px; border:1px solid #ddd; border-radius:10px;">
+        <h2>Delete "{{ home.title }}"?</h2>
+        <p style="color:#888;">This can't be undone. Any applications on this house will be deleted too.</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" style="background:#c0392b; color:#fff; padding:10px 20px; border:none; border-radius:6px; font-weight:bold; margin-right:10px;">
+                Yes, delete it
+            </button>
+            <a href="{% url 'llhome' %}" style="padding:10px 20px; border:1px solid #ccc; border-radius:6px; text-decoration:none; color:#333;">
+                Cancel
+            </a>
+        </form>
+    </div>
+</body>
+</html>

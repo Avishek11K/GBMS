@@ -317,3 +317,36 @@ def update_application_status(request, pk, status):
 def llprofile(request):
     ll = landlord.objects.get(user=request.user)
     return render(request, "llprofile.html", {"ll": ll})
+
+
+# edit and delete 
+@login_required
+def edit_home(request, pk):
+    ll=landlord.objects.get(user=request.user)
+    home=get_object_or_404(Home, pk=pk, landlord=ll)
+    if request.method=="POST":
+        home.title=request.POST.get("title","")
+        home.location=request.POST.get("location","")
+        home.price=request.POST.get("price","")
+        home.description=request.POST.get("desc","")
+        home.is_available=request.POST.get("is_available")=="on"
+
+        home.save()
+        
+        images=request.FILES.getlist("image")
+        for img in images:
+            HomeImage.objects.create(home=home, image=img)
+            messages.success(request,"House updated successfully")
+            return redirect("llhome")
+        return render(request,"edit_home.html",{"homes":home})
+    
+@login_required
+def delete_home(request,pk):
+    ll=landlord.objects.get(user=request.user)
+    home=get_object_or_404(Home,pk=pk,landlord=ll)
+    if request.method=="POST":
+        home.delete()
+        messages.success(request,"Deleted successfully")
+        return redirect("llhome")
+    return render(request,"delete_home.html",{"homes":home})
+

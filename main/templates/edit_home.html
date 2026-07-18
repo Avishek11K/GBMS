@@ -1,0 +1,40 @@
+{% include "llheader.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit House</title>
+    <link rel="stylesheet" href="{% static 'css/gharbhanda.css' %}">
+    <style>
+        .first{ width: 400px; border: 4px solid #eee; padding: 40px; border-radius: 15px; margin: 6% auto; }
+        .first input, .first textarea { width:100%; padding:8px; margin-bottom:12px; border:1px solid #ccc; border-radius:6px; box-sizing:border-box; }
+        .first input[type=submit] { background:#1a7a5e; color:#fff; border:none; cursor:pointer; font-weight:bold; padding:10px; }
+    </style>
+</head>
+<body>
+   <main>
+    <div class="first">
+        <h2>Edit house listing</h2>
+        <form action="" enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            Title: <br>
+            <input type="text" name="title" value="{{ home.title }}" required>
+            Location: <br>
+            <input type="text" name="location" value="{{ home.location }}" required>
+            Price (Rs./month): <br>
+            <input type="number" name="price" value="{{ home.price }}" required>
+            Description: <br>
+            <textarea name="desc" rows="4">{{ home.description }}</textarea>
+            Add more photos (optional): <br>
+            <input type="file" name="image" multiple>
+            <label style="display:block; margin-bottom:12px;">
+                <input type="checkbox" name="is_available" {% if home.is_available %}checked{% endif %} style="width:auto; display:inline;">
+                Available for rent
+            </label>
+            <input type="submit" name="save" value="Save Changes">
+        </form>
+    </div>
+   </main>
+</body>
+</html>
