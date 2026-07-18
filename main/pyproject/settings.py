@@ -64,6 +64,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'pyapp.context_processors.landlord_notifications',
+                'pyapp.context_processors.roomseeker_notifications',
             ],
         },
     },

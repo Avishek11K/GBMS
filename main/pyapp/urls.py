@@ -28,5 +28,6 @@ urlpatterns = [
     "rs_notifications/",
     views.rs_notifications,
     name="rs_notifications"
-)
+    ),
+    path("llapplications",views.llapplications,name="llapplications"),
 ]

@@ -224,6 +224,12 @@ def my_applications(request):
     applications.filter(roomseeker_read=False).update(roomseeker_read=True)
     return render(request, 'my_applications.html', {'applications': applications})
 
+def llapplications(request):
+    """Landlord's own 'notifications' page: status of everything they've applied for."""
+    ll = landlord.objects.get(user=request.user)
+    applications = Application.objects.filter(house__landlord=ll).select_related('user', 'house')
+    applications.filter(landlord_read=False).update(landlord_read=True)
+    return render(request, 'llapplications.html', {'applications': applications})
 
 # ---------- Landlord views ----------
 
@@ -301,7 +307,7 @@ def update_application_status(request, pk, status):
     application = get_object_or_404(Application, pk=pk, house__landlord=ll)
     if status in ['accepted', 'declined', 'pending']:
         application.status = status
-        application.seeker_read = False  # roomseeker gets a fresh notification
+        application.roomseeker_read = False  # roomseeker gets a fresh notification
         application.save()
         messages.success(request, f"Application {status}.")
     return redirect('notify')
