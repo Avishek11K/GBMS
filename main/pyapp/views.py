@@ -59,33 +59,6 @@ def profile(request):
 def about(request):
     return render(request, 'about.html')
 
-
-@login_required
-def home(request):
-    homes = Home.objects.all()
-
-    notify_count = Application.objects.filter(
-        user=request.user
-    ).exclude(status='pending').count()
-
-    return render(request, "home.html", {
-        "homefetch": homes,
-        "notify_count": notify_count,
-    })
-
-@login_required
-def rs_notifications(request):
-    notifications = Application.objects.filter(
-        user=request.user
-    ).exclude(status='pending').order_by('-applied_at')
-
-    notify_count = notifications.count()
-
-    return render(request, "rs_notifications.html", {
-        "notifications": notifications,
-        "notify_count": notify_count,
-    })
-
 # ---------- Register / Login / Logout ----------
 
 def register(request):
