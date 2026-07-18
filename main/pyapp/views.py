@@ -338,7 +338,7 @@ def edit_home(request, pk):
             HomeImage.objects.create(home=home, image=img)
             messages.success(request,"House updated successfully")
             return redirect("llhome")
-        return render(request,"edit_home.html",{"home":home})
+    return render(request,"edit_home.html",{"home":home})
     
 @login_required
 def delete_home(request,pk):
