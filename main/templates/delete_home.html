@@ -1,3 +1,4 @@
+{% comment %} {% load static %}
 {% include "llheader.html" %}
 <!DOCTYPE html>
 <html lang="en">
@@ -5,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delete House</title>
+    
     <link rel="stylesheet" href="{% static 'css/gharbhanda.css' %}">
 </head>
 <body>
@@ -21,5 +23,170 @@
             </a>
         </form>
     </div>
+</body>
+</html> {% endcomment %}
+
+{% load static %}
+{% include "llheader.html" %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete House</title>
+
+    <link rel="stylesheet" href="{% static 'css/gharbhanda.css' %}">
+
+    <style>
+
+        body{
+            background:#F5F7FA;
+            font-family:'Poppins',sans-serif;
+        }
+
+        .delete-wrapper{
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            min-height:85vh;
+            padding:20px;
+        }
+
+        .delete-card{
+            width:100%;
+            max-width:520px;
+            background:#fff;
+            border-radius:18px;
+            padding:35px;
+            text-align:center;
+            box-shadow:0 10px 30px rgba(0,0,0,.08);
+            transition:.3s;
+        }
+
+        .delete-card:hover{
+            transform:translateY(-4px);
+            box-shadow:0 16px 35px rgba(0,0,0,.12);
+        }
+
+        .delete-icon{
+            font-size:60px;
+            margin-bottom:15px;
+        }
+
+        .delete-card h2{
+            color:#1E3A8A;
+            margin-bottom:15px;
+            font-size:28px;
+        }
+
+        .delete-card p{
+            color:#64748B;
+            line-height:1.7;
+            margin-bottom:30px;
+        }
+
+        .btn-group{
+            display:flex;
+            justify-content:center;
+            gap:15px;
+            flex-wrap:wrap;
+        }
+
+        .btn-delete{
+            background:#DC2626;
+            color:white;
+            border:none;
+            padding:12px 24px;
+            border-radius:10px;
+            font-size:15px;
+            font-weight:600;
+            cursor:pointer;
+            transition:.3s;
+        }
+
+        .btn-delete:hover{
+            background:#B91C1C;
+        }
+
+        .btn-cancel{
+            background:#E5E7EB;
+            color:#1F2937;
+            text-decoration:none;
+            padding:12px 24px;
+            border-radius:10px;
+            font-weight:600;
+            transition:.3s;
+        }
+
+        .btn-cancel:hover{
+            background:#CBD5E1;
+        }
+
+        @media(max-width:768px){
+
+            .delete-card{
+                padding:25px;
+            }
+
+            .delete-card h2{
+                font-size:24px;
+            }
+
+            .btn-group{
+                flex-direction:column;
+            }
+
+            .btn-delete,
+            .btn-cancel{
+                width:100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="delete-wrapper">
+
+    <div class="delete-card">
+
+        <div class="delete-icon">🗑️</div>
+
+        <h2>Delete House</h2>
+
+        <p>
+            Are you sure you want to permanently delete
+            <strong>"{{ home.title }}"</strong>?
+            <br><br>
+            This action cannot be undone and all applications
+            related to this house will also be removed.
+        </p>
+
+        <form method="post">
+
+            {% csrf_token %}
+
+            <div class="btn-group">
+
+                <button type="submit" class="btn-delete">
+                    Yes, Delete
+                </button>
+
+                <a href="{% url 'llhome' %}" class="btn-cancel">
+                    Cancel
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
 </body>
 </html>
