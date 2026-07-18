@@ -1,46 +1,3 @@
-{% comment %} {% load static %}
-{% include "llheader.html" %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit House</title>
-    <link rel="stylesheet" href="{% static 'css/gharbhanda.css' %}">
-    <style>
-        .first{ width: 400px; border: 4px solid #eee; padding: 40px; border-radius: 15px; margin: 6% auto; }
-        .first input, .first textarea { width:100%; padding:8px; margin-bottom:12px; border:1px solid #ccc; border-radius:6px; box-sizing:border-box; }
-        .first input[type=submit] { background:#1a7a5e; color:#fff; border:none; cursor:pointer; font-weight:bold; padding:10px; }
-    </style>
-</head>
-<body>
-   <main>
-    <div class="first">
-        <h2>Edit house listing</h2>
-        <form action="" enctype="multipart/form-data" method="post">
-            {% csrf_token %}
-            Title: <br>
-            <input type="text" name="title" value="{{ home.title }}" required>
-            Location: <br>
-            <input type="text" name="location" value="{{ home.location }}" required>
-            Price (Rs./month): <br>
-            <input type="number" name="price" value="{{ home.price }}" required>
-            Description: <br>
-            <textarea name="desc" rows="4">{{ home.description }}</textarea>
-            Add more photos (optional): <br>
-            <input type="file" name="image" multiple>
-            <label style="display:block; margin-bottom:12px;">
-                <input type="checkbox" name="is_available" {% if home.is_available %}checked{% endif %} style="width:auto; display:inline;">
-                Available for rent
-            </label>
-            <input type="submit" name="save" value="Save Changes" onclick="alert('Changes saved successfully');">
-        </form>
-    </div>
-   </main>
-</body>
-</html> {% endcomment %}
-
-
 {% load static %}
 {% include "llheader.html" %}
 
@@ -52,6 +9,7 @@
     <title>Edit House</title>
 
     <link rel="stylesheet" href="{% static 'css/gharbhanda.css' %}">
+    <link rel="stylesheet" href="{% static 'css/back.css' %}">
 
     <style>
 
@@ -61,32 +19,39 @@
         }
 
         .edit-wrapper{
-            max-width:600px;
+            max-width:700px;
             margin:100px auto 40px;
             padding:0 20px;
         }
 
         .edit-card{
             background:#fff;
-            border-radius:18px;
+            border-radius:20px;
+            border:1px solid #E2E8F0;
             padding:35px;
-            box-shadow:0 10px 25px rgba(0,0,0,.08);
+            box-shadow:0 12px 30px rgba(0,0,0,.08);
+            transition:.3s;
+        }
+
+        .edit-card:hover{
+            transform:translateY(-3px);
+            box-shadow:0 18px 35px rgba(0,0,0,.12);
         }
 
         .edit-card h2{
             color:#1E3A8A;
+            font-size:30px;
             margin-bottom:10px;
-            font-size:28px;
         }
 
         .subtitle{
             color:#64748B;
             margin-bottom:30px;
-            font-size:15px;
+            line-height:1.6;
         }
 
         .form-group{
-            margin-bottom:18px;
+            margin-bottom:20px;
         }
 
         .form-group label{
@@ -99,19 +64,21 @@
         .form-group input,
         .form-group textarea{
             width:100%;
-            padding:12px;
+            padding:13px 15px;
+            background:#F8FAFC;
             border:1px solid #CBD5E1;
-            border-radius:10px;
+            border-radius:12px;
             outline:none;
             font-size:15px;
-            transition:.3s;
+            transition:.25s;
             box-sizing:border-box;
         }
 
         .form-group input:focus,
         .form-group textarea:focus{
-            border-color:#2563EB;
-            box-shadow:0 0 0 3px rgba(37,99,235,.15);
+            background:#fff;
+            border-color:#1E3A8A;
+            box-shadow:0 0 0 4px rgba(30,58,138,.12);
         }
 
         textarea{
@@ -122,46 +89,53 @@
             display:flex;
             align-items:center;
             gap:10px;
-            margin:20px 0;
+            margin-top:10px;
         }
 
         .checkbox-group input{
             width:auto;
+            transform:scale(1.15);
+            accent-color:#1E3A8A;
+        }
+
+        .checkbox-group label{
+            margin:0;
+            font-weight:600;
+            color:#334155;
         }
 
         .btn-group{
             display:flex;
             gap:15px;
-            margin-top:30px;
+            margin-top:35px;
+        }
+
+        .save-btn,
+        .cancel-btn{
+            flex:1;
+            padding:13px;
+            border-radius:12px;
+            font-size:15px;
+            font-weight:600;
+            text-align:center;
+            transition:.3s;
         }
 
         .save-btn{
-            flex:1;
-            background:#16A34A;
+            background:#1E3A8A;
             color:#fff;
             border:none;
-            padding:12px;
-            border-radius:10px;
-            font-size:15px;
-            font-weight:600;
             cursor:pointer;
-            transition:.3s;
         }
 
         .save-btn:hover{
-            background:#15803D;
+            background:#163172;
         }
 
         .cancel-btn{
-            flex:1;
-            text-align:center;
-            text-decoration:none;
             background:#E2E8F0;
             color:#334155;
-            padding:12px;
-            border-radius:10px;
-            font-weight:600;
-            transition:.3s;
+            text-decoration:none;
         }
 
         .cancel-btn:hover{
@@ -178,8 +152,17 @@
                 padding:25px;
             }
 
+            .edit-card h2{
+                font-size:26px;
+            }
+
             .btn-group{
                 flex-direction:column;
+            }
+
+            .save-btn,
+            .cancel-btn{
+                width:100%;
             }
 
         }
@@ -187,15 +170,23 @@
     </style>
 
 </head>
+
 <body>
 
 <div class="edit-wrapper">
 
+    <!-- Back Button -->
+    <a href="{% url 'llhome' %}" class="back-link">
+        <span class="arrow">←</span>
+        <span>Back</span>
+    </a>
+
     <div class="edit-card">
 
         <h2>Edit House</h2>
+
         <p class="subtitle">
-            Update your property details and save the changes.
+            Update your property information below. Changes will be reflected immediately after saving.
         </p>
 
         <form method="post" enctype="multipart/form-data">
@@ -203,47 +194,70 @@
             {% csrf_token %}
 
             <div class="form-group">
-                <label>Title</label>
-                <input type="text" name="title" value="{{ home.title }}" required>
+                <label>House Title</label>
+                <input
+                    type="text"
+                    name="title"
+                    value="{{ home.title }}"
+                    required>
             </div>
 
             <div class="form-group">
                 <label>Location</label>
-                <input type="text" name="location" value="{{ home.location }}" required>
+                <input
+                    type="text"
+                    name="location"
+                    value="{{ home.location }}"
+                    required>
             </div>
 
             <div class="form-group">
-                <label>Price (Rs./month)</label>
-                <input type="number" name="price" value="{{ home.price }}" required>
+                <label>Monthly Rent (Rs.)</label>
+                <input
+                    type="number"
+                    name="price"
+                    value="{{ home.price }}"
+                    required>
             </div>
 
             <div class="form-group">
                 <label>Description</label>
-                <textarea name="desc" rows="5">{{ home.description }}</textarea>
+                <textarea
+                    name="desc"
+                    rows="5">{{ home.description }}</textarea>
             </div>
 
             <div class="form-group">
                 <label>Add More Photos (Optional)</label>
-                <input type="file" name="image" multiple>
+                <input
+                    type="file"
+                    name="image"
+                    multiple>
             </div>
 
             <div class="checkbox-group">
-                <input type="checkbox"
-                       name="is_available"
-                       {% if home.is_available %}checked{% endif %}>
-                <label style="margin:0;">Available for Rent</label>
+                <input
+                    type="checkbox"
+                    name="is_available"
+                    {% if home.is_available %}checked{% endif %}>
+                <label>Available for Rent</label>
             </div>
 
             <div class="btn-group">
 
-                <button class="save-btn"
-                        type="submit"
-                        onclick="return confirm('Are you sure you want to save the changes?')">
+                <button
+                    type="submit"
+                    class="save-btn"
+                    onclick="return confirm('Are you sure you want to save the changes?')">
+
                     Save Changes
+
                 </button>
 
                 <a href="{% url 'llhome' %}" class="cancel-btn">
+
                     Cancel
+
                 </a>
 
             </div>
