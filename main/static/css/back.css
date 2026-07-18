@@ -1,0 +1,27 @@
+/* ---------------------------------------------------------------
+   BACK LINK — used at the top of detail/edit/confirm pages
+   --------------------------------------------------------------- */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--gh-muted) !important;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: var(--gh-radius-sm);
+  text-decoration: none !important;
+  margin-bottom: 16px;
+}
+.back-link:hover {
+  color: var(--gh-primary) !important;
+  background: var(--gh-primary-light);
+}
+.back-link .arrow {
+  transition: transform 0.15s ease;
+  font-size: 1rem;
+  line-height: 1;
+}
+.back-link:hover .arrow {
+  transform: translateX(-3px);
+}
