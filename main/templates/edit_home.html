@@ -1,4 +1,4 @@
-{% load static %}
+{% comment %} {% load static %}
 {% include "llheader.html" %}
 <!DOCTYPE html>
 <html lang="en">
@@ -33,9 +33,226 @@
                 <input type="checkbox" name="is_available" {% if home.is_available %}checked{% endif %} style="width:auto; display:inline;">
                 Available for rent
             </label>
-            <input type="submit" name="save" value="Save Changes">
+            <input type="submit" name="save" value="Save Changes" onclick="alert('Changes saved successfully');">
         </form>
     </div>
    </main>
+</body>
+</html> {% endcomment %}
+
+
+{% load static %}
+{% include "llheader.html" %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit House</title>
+
+    <link rel="stylesheet" href="{% static 'css/gharbhanda.css' %}">
+
+    <style>
+
+        body{
+            background:#F5F7FA;
+            font-family:'Poppins',sans-serif;
+        }
+
+        .edit-wrapper{
+            max-width:600px;
+            margin:100px auto 40px;
+            padding:0 20px;
+        }
+
+        .edit-card{
+            background:#fff;
+            border-radius:18px;
+            padding:35px;
+            box-shadow:0 10px 25px rgba(0,0,0,.08);
+        }
+
+        .edit-card h2{
+            color:#1E3A8A;
+            margin-bottom:10px;
+            font-size:28px;
+        }
+
+        .subtitle{
+            color:#64748B;
+            margin-bottom:30px;
+            font-size:15px;
+        }
+
+        .form-group{
+            margin-bottom:18px;
+        }
+
+        .form-group label{
+            display:block;
+            margin-bottom:8px;
+            font-weight:600;
+            color:#334155;
+        }
+
+        .form-group input,
+        .form-group textarea{
+            width:100%;
+            padding:12px;
+            border:1px solid #CBD5E1;
+            border-radius:10px;
+            outline:none;
+            font-size:15px;
+            transition:.3s;
+            box-sizing:border-box;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus{
+            border-color:#2563EB;
+            box-shadow:0 0 0 3px rgba(37,99,235,.15);
+        }
+
+        textarea{
+            resize:vertical;
+        }
+
+        .checkbox-group{
+            display:flex;
+            align-items:center;
+            gap:10px;
+            margin:20px 0;
+        }
+
+        .checkbox-group input{
+            width:auto;
+        }
+
+        .btn-group{
+            display:flex;
+            gap:15px;
+            margin-top:30px;
+        }
+
+        .save-btn{
+            flex:1;
+            background:#16A34A;
+            color:#fff;
+            border:none;
+            padding:12px;
+            border-radius:10px;
+            font-size:15px;
+            font-weight:600;
+            cursor:pointer;
+            transition:.3s;
+        }
+
+        .save-btn:hover{
+            background:#15803D;
+        }
+
+        .cancel-btn{
+            flex:1;
+            text-align:center;
+            text-decoration:none;
+            background:#E2E8F0;
+            color:#334155;
+            padding:12px;
+            border-radius:10px;
+            font-weight:600;
+            transition:.3s;
+        }
+
+        .cancel-btn:hover{
+            background:#CBD5E1;
+        }
+
+        @media(max-width:768px){
+
+            .edit-wrapper{
+                margin-top:90px;
+            }
+
+            .edit-card{
+                padding:25px;
+            }
+
+            .btn-group{
+                flex-direction:column;
+            }
+
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div class="edit-wrapper">
+
+    <div class="edit-card">
+
+        <h2>Edit House</h2>
+        <p class="subtitle">
+            Update your property details and save the changes.
+        </p>
+
+        <form method="post" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" name="title" value="{{ home.title }}" required>
+            </div>
+
+            <div class="form-group">
+                <label>Location</label>
+                <input type="text" name="location" value="{{ home.location }}" required>
+            </div>
+
+            <div class="form-group">
+                <label>Price (Rs./month)</label>
+                <input type="number" name="price" value="{{ home.price }}" required>
+            </div>
+
+            <div class="form-group">
+                <label>Description</label>
+                <textarea name="desc" rows="5">{{ home.description }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Add More Photos (Optional)</label>
+                <input type="file" name="image" multiple>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox"
+                       name="is_available"
+                       {% if home.is_available %}checked{% endif %}>
+                <label style="margin:0;">Available for Rent</label>
+            </div>
+
+            <div class="btn-group">
+
+                <button class="save-btn"
+                        type="submit"
+                        onclick="return confirm('Save changes to this listing?')">
+                    Save Changes
+                </button>
+
+                <a href="{% url 'llhome' %}" class="cancel-btn">
+                    Cancel
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
 </body>
 </html>
