@@ -15,7 +15,7 @@ urlpatterns = [
     path("home.html", views.home_data, name="home.html"),
     path('home/<int:pk>/', views.view_details, name='view_details'),
     path("apply/<int:pk>/", views.process_apply, name="process_apply"),
-    path("llhome/<int:pk>/",views.view_details,name="view_details"),
+    # path("llhome/<int:pk>/",views.view_details,name="view_details"),
     path("my-applications", views.my_applications, name="my_applications"),
 
     # landlord
