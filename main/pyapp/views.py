@@ -59,33 +59,6 @@ def profile(request):
 def about(request):
     return render(request, 'about.html')
 
-
-@login_required
-def home(request):
-    homes = Home.objects.all()
-
-    notify_count = Application.objects.filter(
-        user=request.user
-    ).exclude(status='pending').count()
-
-    return render(request, "home.html", {
-        "homefetch": homes,
-        "notify_count": notify_count,
-    })
-
-@login_required
-def rs_notifications(request):
-    notifications = Application.objects.filter(
-        user=request.user
-    ).exclude(status='pending').order_by('-applied_at')
-
-    notify_count = notifications.count()
-
-    return render(request, "rs_notifications.html", {
-        "notifications": notifications,
-        "notify_count": notify_count,
-    })
-
 # ---------- Register / Login / Logout ----------
 
 def register(request):
@@ -251,6 +224,12 @@ def my_applications(request):
     applications.filter(roomseeker_read=False).update(roomseeker_read=True)
     return render(request, 'my_applications.html', {'applications': applications})
 
+def llapplications(request):
+    """Landlord's own 'notifications' page: status of everything they've applied for."""
+    ll = landlord.objects.get(user=request.user)
+    applications = Application.objects.filter(house__landlord=ll).select_related('user', 'house')
+    applications.filter(landlord_read=False).update(landlord_read=True)
+    return render(request, 'llapplications.html', {'applications': applications})
 
 # ---------- Landlord views ----------
 
@@ -280,7 +259,7 @@ def add(request):
         return redirect("llhome")
     return render(request, "add.html")
 
-
+# notification count for landlord and roomseeker
 @login_required
 def llhome(request):
     """Landlord's own listings page."""
@@ -299,7 +278,28 @@ def notify(request):
     applications = Application.objects.filter(house__landlord=ll).select_related('user', 'house')
     applications.filter(landlord_read=False).update(landlord_read=True)
     return render(request, 'notify.html', {'applications': applications})
+@login_required
+def home(request):
+    homes = Home.objects.all()
+    notify_count = Application.objects.filter(
+        user=request.user
+    ).exclude(status='pending').filter(roomseeker_read=False).count()
+    return render(request, "home.html", {
+        "homefetch": homes,
+        "notify_count": notify_count,
+    })
 
+@login_required
+def rs_notifications(request):
+    notifications = Application.objects.filter(
+        user=request.user
+    ).exclude(status='pending').order_by('-applied_at').select_related('house', 'house__landlord__user')
+    notifications.filter(roomseeker_read=False).update(roomseeker_read=True)
+    return render(request, "rs_notifications.html", {
+        "notifications": notifications
+    })
+
+# notification end for landlord and roomseeker
 
 @login_required
 def update_application_status(request, pk, status):
@@ -307,13 +307,70 @@ def update_application_status(request, pk, status):
     application = get_object_or_404(Application, pk=pk, house__landlord=ll)
     if status in ['accepted', 'declined', 'pending']:
         application.status = status
-        application.seeker_read = False  # roomseeker gets a fresh notification
+        application.roomseeker_read = False  # roomseeker gets a fresh notification
         application.save()
         messages.success(request, f"Application {status}.")
     return redirect('notify')
 
-
+# def rsupdate_application_status(request, pk, status):
+#     application = get_object_or_404(Application, pk=pk, user=request.user)
+#     if status in ['accepted', 'declined', 'pending']:
+#         application.status = status
+#         application.save()
+#         messages.success(request, f"Application {status}.")
+#     return redirect('my_applications')
 @login_required
 def llprofile(request):
     ll = landlord.objects.get(user=request.user)
     return render(request, "llprofile.html", {"ll": ll})
+
+
+# edit and delete 
+@login_required
+def edit_home(request, pk):
+    ll=landlord.objects.get(user=request.user)
+    home=get_object_or_404(Home, pk=pk, landlord=ll)
+    if request.method=="POST":
+        home.title=request.POST.get("title","")
+        home.location=request.POST.get("location","")
+        home.price=request.POST.get("price","")
+        home.description=request.POST.get("desc","")
+        home.is_available=request.POST.get("is_available")=="on"
+
+        home.save()
+        
+        images=request.FILES.getlist("image")
+        for img in images:
+            HomeImage.objects.create(home=home, image=img)
+            messages.success(request,"House updated successfully")
+            return redirect("llhome")
+    return render(request,"edit_home.html",{"home":home})
+    
+@login_required
+def delete_home(request,pk):
+    ll=landlord.objects.get(user=request.user)
+    home=get_object_or_404(Home,pk=pk,landlord=ll)
+    if request.method=="POST":
+        home.delete()
+        messages.success(request,"Deleted successfully")
+        return redirect("llhome")
+    return render(request,"delete_home.html",{"home":home})
+
+def cancel_application(request,pk):
+    application=get_object_or_404(Application, pk=pk, user=request.user)
+    if application.status=="pending":
+        application.delete()
+        messages.success(request,"Application cancelled successfully")
+    else:
+        messages.error(request,"Cannot cancel application that has been processed.")
+    return redirect("my_applications")
+
+def ll_cancel_application(request,pk):
+    ll=landlord.objects.get(user=request.user)
+    application=get_object_or_404(Application,pk=pk,house__landlord=ll)
+    if application.status=="pending":
+        application.delete()
+        messages.success(request,"Application cancelled successfully")
+    else:
+        messages.error(request,"Cannot cancel application that has been processed.")
+    return redirect("llapplications")

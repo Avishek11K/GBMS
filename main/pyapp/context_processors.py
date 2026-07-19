@@ -12,3 +12,13 @@ def landlord_notifications(request):
         except landlord.DoesNotExist:
             return {'pending_count': 0}
     return {}
+
+def roomseeker_notifications(request):
+    """Makes 'notify_count' available on every page automatically,
+    so the roomseeker's badge shows up no matter which page they're on."""
+    if request.user.is_authenticated and request.user.groups.filter(name="roomseeker").exists():
+        count = Application.objects.filter(
+            user=request.user
+        ).exclude(status='pending').filter(roomseeker_read=False).count()
+        return {'notify_count': count}
+    return {}
