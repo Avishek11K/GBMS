@@ -302,8 +302,9 @@ def rs_notifications(request):
 # notification end for landlord and roomseeker
 def rsupdate_application_status(request, pk, status):
     application = get_object_or_404(Application, pk=pk, user=request.user)
-    if status in ['accepted', 'declined', 'pending']:
+    if status in ['accepted', 'declined','pending']:
         application.status = status
+        application.roomseeker_read = True
         application.save()
         messages.success(request, f"Application {status}.")
     return redirect('my_applications')
@@ -314,7 +315,7 @@ def update_application_status(request, pk, status):
     application = get_object_or_404(Application, pk=pk, house__landlord=ll)
     if status in ['accepted', 'declined', 'pending']:
         application.status = status
-        application.roomseeker_read = False  # roomseeker gets a fresh notification
+        application.roomseeker_read = True  # roomseeker gets a fresh notification
         application.save()
         messages.success(request, f"Application {status}.")
     return redirect('notify')
