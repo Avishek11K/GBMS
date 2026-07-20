@@ -359,17 +359,9 @@ nav{
             {% if upending_count %}<span class="notif-badge">{{ upending_count }}</span>{% endif %}
         </a> {% endcomment %}
 
-        <a href="{% url 'rs_notifications' %}" style="position:relative;">
-    <img class="notification"
-         src="https://cdn-icons-png.flaticon.com/128/3602/3602145.png"
-         alt="Notifications">
-
-    {% if notify_count %}
-        <span class="notif-badge">
-            {{ notify_count }}
-        </span>
-    {% endif %}
-</a>
+          <a href="{% url 'rs_notifications' %}" style="position:relative;">
+            <img class="notification"src="https://cdn-icons-png.flaticon.com/128/3602/3602145.png"alt="Notifications">
+            {% if notify_count %}<span class="notif-badge">{{ notify_count }}</span>{% endif %}</a>
         </nav>
         </div>
     </header>
