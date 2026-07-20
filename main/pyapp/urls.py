@@ -18,6 +18,7 @@ urlpatterns = [
     # path("llhome/<int:pk>/",views.view_details,name="view_details"),
     path("my-applications", views.my_applications, name="my_applications"),
 
+ path('application/<int:pk>/cancel/', views.cancel_application, name='cancel_application'),
     # landlord
     path("llhome", views.llhome, name="llhome"),
     path("add.html", views.add, name="add.html"),
@@ -33,6 +34,5 @@ urlpatterns = [
     path("llapplications",views.llapplications,name="llapplications"),
     path("llhome/<int:pk>/edit/",views.edit_home,name="edit_home"),
     path("llhome/<int:pk>/delete/",views.delete_home,name="delete_home"),
-    path('application/<int:pk>/cancel/', views.cancel_application, name='cancel_application'),
     path("llapplications/<int:pk>/cancel/",views.ll_cancel_application,name="ll_cancel_application")
 ]
