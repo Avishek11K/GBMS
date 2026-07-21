@@ -11,6 +11,9 @@
         {% csrf_token %}
         <div class="forall">
           <h3>Gharbhanda Management System | Login</h3>
+           {% for msg in messages %}
+        <span><p style="color:green">{{ msg }}</p></span>
+      {% endfor %}
           <div class="un">
             Username<br />
             <input type="text" name="username" placeholder="Enter username" />
