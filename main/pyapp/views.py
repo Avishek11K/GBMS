@@ -203,7 +203,10 @@ def view_details(request, pk):
 @login_required
 def process_apply(request, pk):
     house = get_object_or_404(Home, pk=pk)
-
+    if house.landlord and house.landlord.user==request.user:
+        messages.error(request, "You cannot apply for your own house.")
+        return redirect('view_details', pk=pk)
+    
     if Application.objects.filter(user=request.user, house=house).exists():
         messages.info(request, "You have already applied for this house.")
         return redirect('view_details', pk=pk)
