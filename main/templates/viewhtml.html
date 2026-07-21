@@ -227,8 +227,13 @@ input[type="submit"]{
             </div>
 
             <div style="margin-top:25px;">
-                {% if already_applied %}
-                    <span style="background:#dbeee7; color:#14614a; padding:8px 14px; border-radius:6px;">You have already applied for this house.</span>
+                {% if is_landlord %}
+                {% for msg in messages %}
+                    <span style="background:#dbeee7; color:#14614a; padding:8px 14px; border-radius:6px;">{{ msg }}</span>
+                {% endfor %}
+                {% elif already_applied %}
+                    <span style="background:#dbeee7; color:#14614a; padding:8px 14px; border-radius:6px;">Already applied</span>
+
                 {% else %}
                     <form action="{% url 'process_apply' vd.id %}" method="POST" style="display:inline;">
                         {% csrf_token %}
