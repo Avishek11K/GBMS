@@ -227,10 +227,10 @@ input[type="submit"]{
             </div>
 
             <div style="margin-top:25px;">
-                {% if is_landlord %}
-                {% for msg in messages %}
-                    <span style="background:#dbeee7; color:#14614a; padding:8px 14px; border-radius:6px;">{{ msg }}</span>
-                {% endfor %}
+                {% if is_landlord and vd.landlord.user == request.user and messages %}
+               
+                    <span style="background:#dbeee7; color:#14614a; padding:8px 14px; border-radius:6px;">{{ message }}</span>
+                
                 {% elif already_applied %}
                     <span style="background:#dbeee7; color:#14614a; padding:8px 14px; border-radius:6px;">Already applied</span>
 
