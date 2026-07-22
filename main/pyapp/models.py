@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 # from pyapp.models import Home
 
 
-# Create your models here.
+# Create your models here.not in use but can be used in future for contact us form
 class Contact(models.Model):
     name = models.CharField(max_length=140)
     email = models.CharField(max_length=160)
