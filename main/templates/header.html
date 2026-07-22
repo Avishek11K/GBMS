@@ -5,163 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        {% comment %} header{
-    display: flex;
-    justify-content:right;
-    position:relative;
-    align-items:center;
-    margin: 0px;
-    gap: 1rem;
-}
-nav{
-    display: flex;
-    gap: 40px;
-}
-.nhome{
-    font-size: 20px;
-    gap: 1rem;
-    font-family: 'Times New Roman', Times, serif;
-}
-.ncontact{
-    font-size: 20px;
-    gap: 1rem;
-    font-family: 'Times New Roman', Times, serif;
-}
-.nabout{
-    font-size: 20px;
-    gap: 1rem;
-    font-family: 'Times New Roman', Times, serif;
-}
-.nlogout{
-    font-size: 20px;
-    gap: 1rem;
-    font-family: 'Times New Roman', Times, serif;
-}
-.hamburger{
-    width: 22px;
-    height: auto;
-    cursor: pointer;
-    position: fixed;
-    top:5px;
-    left:5px;
-    z-index:1000;
-}
-.user{
-    display: flex;
-    position: fixed;
-    left:20%;
-}
-
-
-#menu-toggle {
-    display: none;
-}
-
-
-.sidebar {
-    position: fixed;
-    top: 0;
-    left: -250px; 
-    width: 250px;
-    height: 100%;
-    background-color: grey  ;
-    transition: 0.3s;
-    a:hover{
-        background-color: aqua;
-        border-radius: 10px;
-    }
-}
-
-
-#menu-toggle:checked ~ .sidebar {
-    left: 0px;
-}
-#menu-toggle:checked ~ .hamburger-icon{
-    display: none;
-    left:-60px;
-}
-
-
-.sidebar a {
-    display: block;
-    align-items: center;
-    color: white;
-    
-    padding:20px;
-    text-decoration: none;
-}
-.sidebar{
-    position:fixed;
-    z-index: 999;
-    padding-top: 50px;
-
-}
-
-.one{
-    top: 65px;
-    display: flex;
-    justify-content: flex-start;
-    position: fixed;
-    left:10%;
-   
-}
-.two{
-    top:65px;
-    display: flex;
-    justify-content: center;
-    position: fixed;
-    left: 44%;
-   
-}
-.three{
-    top:65px;
-    display: flex;
-    justify-content: flex-end;
-    position: fixed;
-    left: 80%;
-   
-}
-.four{
-    display: flex;
-    position: fixed;
-    justify-content: flex-start;
-    top:50%;
-    left:10%;
-}
-.five{
-    display: flex;
-    position: fixed;
-    justify-content: flex-start;
-    top:50%;
-    left:44%;
-}
-.six{
-   display: flex;
-    position: fixed;
-    justify-content: flex-start;
-    top:50%;
-    left:80%; 
-}
-.notification{
-    width:20px;
-    display: flex;
-    background-color: white;
-    height:auto;
-    right:0px;
-    cursor: pointer;
-}
-#home:checked ~.home.html{
-    left:0px;
-
-}
-section{
-    display: flex;
-    justify-content: space-around;
-} {% endcomment %}
-
-{% comment %} ui added header {% endcomment %}
-/* ---------- Global ---------- */
-
+{% comment %} added cs {% endcomment %}
 *{
     margin:0;
     padding:0;
@@ -196,23 +40,6 @@ nav{
     gap:20px;
 }
 
-/* ---------- Top Icons ---------- */
-
-.notification{
-    width:28px;
-    height:28px;
-    background:white;
-    border-radius:50%;
-    padding:5px;
-    cursor:pointer;
-    transition:.3s;
-}
-
-.notification:hover{
-    transform:scale(1.12);
-    background:#D4A017;
-}
-
 /* ---------- Hamburger ---------- */
 
 .hamburger{
@@ -228,8 +55,6 @@ nav{
 .hamburger:hover{
     transform:scale(1.1);
 }
-
-/* Hide Checkbox */
 
 #menu-toggle{
     display:none;
@@ -250,8 +75,6 @@ nav{
     box-shadow:5px 0 20px rgba(0,0,0,.15);
 }
 
-/* Open Sidebar */
-
 #menu-toggle:checked ~ .sidebar{
     left:0;
 }
@@ -265,8 +88,8 @@ nav{
     padding:16px 25px;
     font-size:16px;
     font-weight:500;
-    transition:.3s;
     border-left:4px solid transparent;
+    transition:.3s;
 }
 
 .sidebar a:hover{
@@ -275,20 +98,40 @@ nav{
     padding-left:32px;
 }
 
-/* ---------- Unused Classes ---------- */
+/* ---------- Top Icons ---------- */
 
-.nhome,
-.ncontact,
-.nabout,
-.nlogout,
-.user,
-.one,
-.two,
-.three,
-.four,
-.five,
-.six{
-    display:none;
+.notification{
+    width:28px;
+    height:28px;
+    background:#FFFFFF;
+    border-radius:50%;
+    padding:5px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.notification:hover{
+    background:#D4A017;
+    transform:scale(1.12);
+}
+
+/* ---------- Notification Badge ---------- */
+
+.notif-badge{
+    position:absolute;
+    top:-6px;
+    right:-6px;
+    background:#DC2626;
+    color:white;
+    min-width:18px;
+    height:18px;
+    border-radius:50%;
+    font-size:10px;
+    font-weight:600;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:2px solid white;
 }
 
 /* ---------- Main ---------- */
@@ -359,17 +202,9 @@ nav{
             {% if upending_count %}<span class="notif-badge">{{ upending_count }}</span>{% endif %}
         </a> {% endcomment %}
 
-        <a href="{% url 'rs_notifications' %}" style="position:relative;">
-    <img class="notification"
-         src="https://cdn-icons-png.flaticon.com/128/3602/3602145.png"
-         alt="Notifications">
-
-    {% if notify_count %}
-        <span class="notif-badge">
-            {{ notify_count }}
-        </span>
-    {% endif %}
-</a>
+          <a href="{% url 'rs_notifications' %}" style="position:relative;">
+            <img class="notification"src="https://cdn-icons-png.flaticon.com/128/3602/3602145.png"alt="Notifications">
+            {% if notify_count %}<span class="notif-badge">{{ notify_count }}</span>{% endif %}</a>
         </nav>
         </div>
     </header>

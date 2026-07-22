@@ -92,7 +92,7 @@ class Application(models.Model):
     # seeker_read: powers the "unread notification" badge for the roomseeker,
     # set False again whenever the landlord changes the status
     # seeker_read = models.BooleanField(default=True)
-    roomseeker_read = models.BooleanField(default=False)
+    roomseeker_read = models.BooleanField(default=True)
 
     class Meta:
         ordering = ["-applied_at"]

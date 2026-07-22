@@ -203,7 +203,10 @@ def view_details(request, pk):
 @login_required
 def process_apply(request, pk):
     house = get_object_or_404(Home, pk=pk)
-
+    if house.landlord and house.landlord.user==request.user:
+        messages.error(request, "You cannot apply for your own house.")
+        return redirect('view_details', pk=pk)
+    
     if Application.objects.filter(user=request.user, house=house).exists():
         messages.info(request, "You have already applied for this house.")
         return redirect('view_details', pk=pk)
@@ -300,6 +303,14 @@ def rs_notifications(request):
     })
 
 # notification end for landlord and roomseeker
+def rsupdate_application_status(request, pk, status):
+    application = get_object_or_404(Application, pk=pk, user=request.user)
+    if status in ['accepted', 'declined','pending']:
+        application.status = status
+        application.roomseeker_read = False  # roomseeker gets a fresh notification
+        application.save()
+        messages.success(request, f"Application {status}.")
+    return redirect('my_applications')
 
 @login_required
 def update_application_status(request, pk, status):
@@ -312,13 +323,7 @@ def update_application_status(request, pk, status):
         messages.success(request, f"Application {status}.")
     return redirect('notify')
 
-# def rsupdate_application_status(request, pk, status):
-#     application = get_object_or_404(Application, pk=pk, user=request.user)
-#     if status in ['accepted', 'declined', 'pending']:
-#         application.status = status
-#         application.save()
-#         messages.success(request, f"Application {status}.")
-#     return redirect('my_applications')
+
 @login_required
 def llprofile(request):
     ll = landlord.objects.get(user=request.user)
