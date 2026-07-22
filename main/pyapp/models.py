@@ -57,7 +57,7 @@ class Home(models.Model):
     def __str__(self):
         return self.title
 
-
+# not in use but can be used in future for available rent
 class availablerent(models.Model):
     home = models.ForeignKey(
         Home, on_delete=models.CASCADE, related_name="avhome", blank=True, null=True
