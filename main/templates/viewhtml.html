@@ -21,6 +21,60 @@ body{
     padding:0;
 }
 
+{% comment %} added css first {% endcomment %}
+
+.success-msg,
+.error-msg{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:15px 0;
+    padding:12px 16px;
+    border-radius:10px;
+    font-size:14px;
+    font-weight:500;
+}
+
+.success-msg{
+    background:#ECFDF5;
+    color:#166534;
+    border:1px solid #A7F3D0;
+    border-left:5px solid #16A34A;
+}
+
+.success-msg::before{
+    content:"✓";
+    font-weight:bold;
+}
+
+.error-msg{
+    background:#FEF2F2;
+    color:#991B1B;
+    border:1px solid #FECACA;
+    border-left:5px solid #DC2626;
+}
+
+.error-msg::before{
+    content:"✕";
+    font-weight:bold;
+}
+
+.apply-btn{
+    cursor:pointer;
+    background:#1E3A8A;
+    color:#fff;
+    border:none;
+    padding:12px 22px;
+    border-radius:10px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.apply-btn:hover{
+    background:#163172;
+}
+
+{% comment %} added last css {% endcomment %}
 /* ---------- Main ---------- */
 
 main{
@@ -227,28 +281,31 @@ input[type="submit"]{
             </div>
 
             <div style="margin-top:25px;">
-                {% if messages %}
-                    {% for message in messages %}
-                        {% if 'self_apply' in message.tags %}
-                            <span style="background:#FEE2E2; color:#991B1B; padding:8px 14px; border-radius:6px;">{{ message }}</span>
-                        {% endif %}
-                    {% endfor %}
-                {% comment %} {% endif %} {% endcomment %}
-                {% comment %} {% if already_applied %}
-                {% endcomment %}
-                    {% comment %} <span style="background:#dbeee7; color:#14614a; padding:8px 14px; border-radius:6px;">{{ message }}</span> {% endcomment %}
-                
-                {% elif already_applied %}
-                    <span style="background:#dbeee7; color:#14614a; padding:8px 14px; border-radius:6px;">Already applied</span>
+               {% if messages %}
+    {% for message in messages %}
+        {% if 'self_apply' in message.tags %}
+            <div class="error-msg">
+                {{ message }}
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
 
-                {% else %}
-                    <form action="{% url 'process_apply' vd.id %}" method="POST" style="display:inline;">
-                        {% csrf_token %}
-                        <input type="submit" name="apply" value="Apply now"
-                               style="cursor:pointer; background:#1a7a5e; color:#fff; border:none; padding:10px 20px; border-radius:6px; font-weight:bold;"
-                               onclick="return confirm('Are you sure to apply?');">
-                    </form>
-                {% endif %}
+{% if already_applied %}
+    <div class="success-msg">
+        Already applied for this house.
+    </div>
+{% else %}
+    <form action="{% url 'process_apply' vd.id %}" method="POST" style="display:inline;">
+        {% csrf_token %}
+        <button
+            type="submit"
+            class="apply-btn"
+            onclick="return confirm('Are you sure you want to apply for this house?')">
+            Apply Now
+        </button>
+    </form>
+{% endif %}
             </div>
         </div>
 
