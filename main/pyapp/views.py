@@ -104,7 +104,7 @@ def register(request):
         if role == "rentseeker":
             RoomSeekerProfile.objects.create(user=user, phone=phone)
 
-        messages.success(request, "Account created! Please log in.")
+        messages.success(request, "Account created! Please log in.", extra_tags='login')
         return redirect('loginUser')
     return render(request, 'register.html')
 

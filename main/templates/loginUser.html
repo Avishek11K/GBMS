@@ -11,7 +11,9 @@
         {% csrf_token %}
         <div class="forall">
           <h3>Gharbhanda Management System | Login</h3>
+          {% if messages %}
            {% for msg in messages %}
+           {% if 'login' in msg.tags %}
         <span><p style="color:green;display:flex;
     align-items:center;
     gap:10px;
@@ -28,7 +30,10 @@
     border-radius:10px;
     font-size:14px;
     font-weight:500;">{{ msg }}</p></span>
-      {% endfor %}
+     {% endif %}
+     {% endfor %}
+     {% endif %}
+      
           <div class="un">
             Username<br />
             <input type="text" name="username" placeholder="Enter username" />
