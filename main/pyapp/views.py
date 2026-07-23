@@ -204,7 +204,7 @@ def view_details(request, pk):
 def process_apply(request, pk):
     house = get_object_or_404(Home, pk=pk)
     if house.landlord and house.landlord.user==request.user:
-        messages.error(request, "You cannot apply for your own house.")
+        messages.error(request, "You cannot apply for your own house.",extra_tags='self_apply')
         return redirect('view_details', pk=pk)
     
     if Application.objects.filter(user=request.user, house=house).exists():
