@@ -118,7 +118,7 @@ def loginUser(request):
         user = authenticate(username=username, password=password)
         if not user:
             return render(request, "loginUser.html", {
-                "error": "Username or password didnt matched!"
+                "crerror": "Username or password didnt matched!"
             })
         if email=="" or username=="" or password=="":
             return render(request,"loginUser.html",{
