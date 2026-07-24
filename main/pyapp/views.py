@@ -115,6 +115,10 @@ def loginUser(request):
         password = request.POST.get('password')
         email=request.POST.get('email')
 
+        if email=="":
+                    return render(request,"loginUser.html",{
+                        "emptyemail": "Email shouldnt be empty!"
+                    })
         user = authenticate(username=username, password=password)
         if not user:
             return render(request, "loginUser.html", {
@@ -126,10 +130,7 @@ def loginUser(request):
                 "emptyusername": "Username shouldnt be empty!",
                 "emptypassword": "Password shouldnt be empty!"
             })
-        if email=="":
-            return render(request,"loginUser.html",{
-                "emptyemail": "Email shouldnt be empty!"
-            })
+        
         if user.groups.filter(name="rentseeker").exists():
             login_auth(request, user)
             return redirect("home.html")
