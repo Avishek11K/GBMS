@@ -120,6 +120,12 @@ def loginUser(request):
             return render(request, "loginUser.html", {
                 "error": "Username or password didnt matched!"
             })
+        if email=="" or username=="" or password=="":
+            return render(request,"loginUser.html",{
+                "emptyemail": "Email shouldnt be empty!",
+                "emptyusername": "Username shouldnt be empty!",
+                "emptypassword": "Password shouldnt be empty!"
+            })
         if email=="":
             return render(request,"loginUser.html",{
                 "emptyemail": "Email shouldnt be empty!"
