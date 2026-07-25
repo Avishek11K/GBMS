@@ -6,54 +6,51 @@
     <link rel="stylesheet" href="{% static 'css/register.css' %}" />
   </head>
   <body>
+    {% comment %}For rentseeker{% endcomment %}
 
-{% comment %} For rentseeker {% endcomment %}
-
-    <div id="rent" class="container">  
-
+    <div id="rent" class="container">
       <form method="POST">
         {% csrf_token %}
-        <h3>Gharbhaada Management System | Sign up </h3>
+        <h3>Gharbhaada Management System | Sign up</h3>
         <div class="forall">
           <div class="un">
             Username<br />
             <input type="text" name="username" placeholder="Enter username" />
-      
-            {% if blankuser %}
-          <span><p style="color:red">{{blankuser}}</p></span>
-          {% endif %}
 
-          {% if error %}
-              <span><p style="color:red">{{ error }}</p></span>
+            {% if blankuser %}
+              <span><p style="color:red">{{ blankuser }}</p></span>
             {% endif %}
 
+            {% if error %}
+              <span><p style="color:red">{{ error }}</p></span>
+            {% endif %}
           </div>
           <br /><br />
           <div class="em">
             Email<br />
             <input type="email" name="email" placeholder="Enter email" />
-             
-             {% if blankemail %}
-          <span><p style="color:red">{{blankemail}}</p></span>
-          {% endif %}
-            
-          {% if error %}
+
+            {% if blankemail %}
+              <span><p style="color:red">{{ blankemail }}</p></span>
+            {% endif %}
+
+            {% if error %}
               <span><p style="color:red">{{ error }}</p></span>
-          {% endif %}
+            {% endif %}
           </div>
           <br /><br />
 
           <div class="role">
-            Role<br>
+            Role<br />
             <select name="role">
-             <option value="">Select role</option>
-               <option value="rentseeker" name="rentseeker">Rentseeker</option>
-             <option value="landlord" name="landlord">Landlord</option>
+              <option value="">Select role</option>
+              <option value="rentseeker" name="rentseeker">Rentseeker</option>
+              <option value="landlord" name="landlord">Landlord</option>
             </select>
-            {% if blankpassword %}
-          <span><p style="color:red">{{blankpassword}}</p></span>
-          {% endif %}
-          </div><br>
+            {% if blankrole %}
+              <span><p style="color:red">{{ blankrole }}</p></span>
+            {% endif %}
+          </div><br />
 
           <div class="phone">
             Phone (used for WhatsApp contact)<br />
@@ -65,8 +62,8 @@
             Password<br />
             <input type="password" name="password" placeholder="Enter your password" />
             {% if blankpassword %}
-          <span><p style="color:red">{{blankpassword}}</p></span>
-          {% endif %}
+              <span><p style="color:red">{{ blankpassword }}</p></span>
+            {% endif %}
           </div>
           <br /><br />
           <div class="submit">
@@ -78,8 +75,5 @@
         </div>
       </form>
     </div>
-
-
-  
   </body>
 </html>

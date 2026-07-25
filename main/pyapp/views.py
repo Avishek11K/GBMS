@@ -83,7 +83,6 @@ def register(request):
         email = request.POST.get("email", "")
         phone = request.POST.get("phone", "")
         password = request.POST.get("password")
-
         if User.objects.filter(Q(username=username) | Q(email=email)).exists():
             return render(
                 request,
