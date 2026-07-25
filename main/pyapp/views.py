@@ -120,17 +120,18 @@ def loginUser(request):
                     return render(request,"loginUser.html",{
                         "emptyemail": "Email shouldnt be empty!"
                     })
+        if email=="" or username=="" or password=="":
+                    return render(request,"loginUser.html",{
+                        "emptemail": "Email shouldnt be empty!",
+                        "emptusername": "Username shouldnt be empty!",
+                        "emptpassword": "Password shouldnt be empty!"
+                    })
         user = authenticate(username=username, password=password)
         if not user:
             return render(request, "loginUser.html", {
                 "crerror": "Username or password didnt matched!"
             })
-        if email=="" or username=="" or password=="":
-            return render(request,"loginUser.html",{
-                "emptemail": "Email shouldnt be empty!",
-                "emptusername": "Username shouldnt be empty!",
-                "emptpassword": "Password shouldnt be empty!"
-            })
+       
         
         if user.groups.filter(name="rentseeker").exists():
             login_auth(request, user)

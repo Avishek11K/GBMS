@@ -43,7 +43,7 @@
           <div class="em">
             Email<br />
             <input type="email" name="email" placeholder="Enter email" />
-            <span style="color: red;justify-content:space-between;">{{ emptymail }}</span>
+            {% comment %} <span style="color: red;justify-content:space-between;">{{ emptymail }}</span> {% endcomment %}
             {% if emptemail %}<span style="color: red;">{{ emptemail }}</span>{% endif %}
           </div>
           <br /><br />
