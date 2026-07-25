@@ -143,6 +143,33 @@ def loginUser(request):
                     "emptpassword": "Password shouldnt be empty!",
                 },
             )
+        if email == "" and username == "":
+            return render(
+                request,
+                "loginUser.html",
+                {
+                    "emptemail": "Email shouldnt be empty!",
+                    "emptusername": "Username shouldnt be empty!",
+                },
+            )
+        if email == "" and password == "":
+            return render(
+                request,
+                "loginUser.html",
+                {
+                    "emptemail": "Email shouldnt be empty!",
+                    "emptpassword": "Password shouldnt be empty!",
+                },
+            )
+        if username == "" and password == "":
+            return render(
+                request,
+                "loginUser.html",
+                {
+                    "emptusername": "Username shouldnt be empty!",
+                    "emptpassword": "Password shouldnt be empty!",
+                },
+            )
         user = authenticate(username=username, password=password)
         if not user:
             return render(
