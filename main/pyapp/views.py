@@ -115,17 +115,13 @@ def loginUser(request):
         password = request.POST.get('password')
         email=request.POST.get('email')
         button=request.POST.get('Login')
-
-        if email=="":
-                    return render(request,"loginUser.html",{
-                        "emptyemail": "Email shouldnt be empty!"
-                    })
-        if email=="" or username=="" or password=="":
-                    return render(request,"loginUser.html",{
-                        "emptemail": "Email shouldnt be empty!",
-                        "emptusername": "Username shouldnt be empty!",
-                        "emptpassword": "Password shouldnt be empty!"
-                    })
+      
+        if email=="" and username=="" and password=="":
+                            return render(request,"loginUser.html",{
+                                "emptemail": "Email shouldnt be empty!",
+                                "emptusername": "Username shouldnt be empty!",
+                                "emptpassword": "Password shouldnt be empty!"
+                            })
         user = authenticate(username=username, password=password)
         if not user:
             return render(request, "loginUser.html", {
