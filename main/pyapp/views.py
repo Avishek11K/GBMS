@@ -114,6 +114,7 @@ def loginUser(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         email=request.POST.get('email')
+        button=request.POST.get('Login')
 
         if email=="":
                     return render(request,"loginUser.html",{
