@@ -1,283 +1,69 @@
-{% include "header.html" %}
+{% include 'header.html' %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Available Homes</title>
-<style>
-{% comment %} ui added for home {% endcomment %}
-body{
-    background:#F5F7FA;
-    font-family:'Poppins',sans-serif;
-}
-
-/* Filter Section */
-
-.filter-bar{
-    margin:6% 5% 0 17%;
-    display:flex;
-    gap:15px;
-    flex-wrap:wrap;
-    align-items:center;
-}
-
-.filter-bar input{
-    padding:12px 15px;
-    border:1px solid #D1D5DB;
-    border-radius:10px;
-    outline:none;
-    width:220px;
-    font-size:14px;
-    transition:.3s;
-    background:#fff;
-}
-
-.filter-bar input:focus{
-    border-color:#2563EB;
-    box-shadow:0 0 10px rgba(37,99,235,.15);
-}
-
-.filter-bar button{
-    padding:12px 22px;
-    border:none;
-    border-radius:10px;
-    background:#1E3A8A;
-    color:white;
-    cursor:pointer;
-    font-weight:600;
-    transition:.3s;
-}
-
-.filter-bar button:hover{
-    background:#2563EB;
-}
-
-.filter-bar a{
-    color:#1E3A8A;
-    text-decoration:none;
-    font-weight:600;
-}
-
-.filter-bar a:hover{
-    color:#D4A017;
-}
-
-/* Welcome */
-
-.wel p{
-    color:#334155;
-    font-size:17px;
-}
-
-/* House Cards */
-
-.house-container{
-    display:flex;
-    flex-wrap:wrap;
-    gap:28px;
-    margin:30px 5% 40px 17%;
-}
-
-.house-card{
-    width:320px;
-    background:#fff;
-    border:none;
-    border-radius:18px;
-    overflow:hidden;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-    transition:.35s;
-}
-
-.house-card:hover{
-    transform:translateY(-8px);
-    box-shadow:0 20px 40px rgba(0,0,0,.14);
-}
-
-.house-card img{
-    width:100%;
-    height:220px;
-    object-fit:cover;
-    transition:.4s;
-}
-
-.house-card:hover img{
-    transform:scale(1.05);
-}
-
-.house-card h2{
-    font-size:22px;
-    color:#1E293B;
-    margin:15px;
-}
-
-.house-card p{
-    margin:10px 15px;
-    color:#475569;
-    line-height:1.5;
-}
-
-/* Applied Badge */
-
-.badge-applied{
-    margin-left:15px;
-    background:#DCFCE7;
-    color:#15803D;
-    padding:5px 12px;
-    border-radius:20px;
-    font-size:13px;
-    font-weight:600;
-}
-
-/* WhatsApp */
-
-.contact-btn{
-    display:inline-block;
-    margin:12px 15px;
-    text-decoration:none;
-    background:#25D366;
-    color:white;
-    padding:8px 15px;
-    border-radius:8px;
-    font-size:14px;
-    transition:.3s;
-}
-
-.contact-btn:hover{
-    background:#1EBE5D;
-}
-
-/* Bottom Actions */
-
-.house-card div{
-    margin:18px 15px;
-}
-
-.house-card div a{
-    text-decoration:none;
-    color:#2563EB;
-    font-weight:600;
-}
-
-.house-card div a:hover{
-    color:#1D4ED8;
-}
-
-.house-card input[type="submit"]{
-    border:none;
-    background:#1E3A8A;
-    color:white !important;
-    padding:8px 18px;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:600;
-    transition:.3s;
-}
-
-.house-card input[type="submit"]:hover{
-    background:#2563EB;
-}
-
-.house-card span{
-    font-weight:600;
-}
-
-/* Empty */
-
-h2{
-    color:#475569;
-}
-
-/* Responsive */
-
-@media(max-width:992px){
-
-.filter-bar{
-    margin:110px 20px 20px;
-}
-
-.house-container{
-    margin:20px;
-    justify-content:center;
-}
-
-.wel{
-    margin-left:20px !important;
-    margin-top:100px !important;
-}
-
-}
-
-@media(max-width:600px){
-
-.filter-bar input{
-    width:100%;
-}
-
-.filter-bar button{
-    width:100%;
-}
-
-.house-card{
-    width:100%;
-}
-
-}
-{% comment %} ui added ends here {% endcomment %}
-</style>
-</head>
-<body>
+    <style></style>
+  </head>
+  <body>
     <div class="wel" style="margin-left: 17%; margin-top: 5%;">
-        <p>Welcome, <strong>{{ user.username }}</strong></p>
+      <p>
+        Welcome, <strong>{{ user.username }}</strong>
+      </p>
     </div>
 
     <form method="get" class="filter-bar">
-        <input type="text" name="q" placeholder="Search by title or location" value="{{ q }}">
-        <input type="number" name="min_price" placeholder="Min price" value="{{ min_price }}">
-        <input type="number" name="max_price" placeholder="Max price" value="{{ max_price }}">
-        <button type="submit">Filter</button>
-        {% if q or min_price or max_price %}<a href="{% url 'home.html' %}" style="align-self:center;">Clear</a>{% endif %}
+      <input type="text" name="q" placeholder="Search by title or location" value="{{ q }}" />
+      <input type="number" name="min_price" placeholder="Min price" value="{{ min_price }}" />
+      <input type="number" name="max_price" placeholder="Max price" value="{{ max_price }}" />
+      <button type="submit">Filter</button>
+      {% if q or min_price or max_price %}
+        <a href="{% url 'home.html' %}" style="align-self:center;">Clear</a>
+      {% endif %}
     </form>
 
     <div class="house-container">
-    {% for house in homefetch %}
+      {% for house in homefetch %}
         <div class="house-card">
-            {% if house.images.first %}
-                <img src="{{ house.images.first.image.url }}" alt="{{ house.title }}">
-            {% endif %}
+          {% if house.images.first %}
+            <img src="{{ house.images.first.image.url }}" alt="{{ house.title }}" />
+          {% endif %}
 
-            <h2>{{ house.title }}</h2>
-            <p><strong>Location:</strong> {{ house.location }}</p>
-            <p><strong>Price:</strong> Rs {{ house.price }}</p>
+          <h2>{{ house.title }}</h2>
+          <p>
+            <strong>Location:</strong> {{ house.location }}
+          </p>
+          <p>
+            <strong>Price:</strong> Rs {{ house.price }}
+          </p>
+
+          {% if house.id in applied_house_ids %}
+            <span class="badge-applied">Already applied</span><br />
+          {% endif %}
+
+          {% if house.landlord.phone %}
+            <span><a class="contact-btn" href="https://wa.me/{{ house.landlord.phone }}?text=Hello%2C%20I%27m%20interested%20in%20{{ house.title|urlencode }}" target="_blank">Contact on WhatsApp</a></span>
+          {% endif %}
+
+          <div style="margin-top: 15px;">
+            <a href="{% url 'view_details' house.id %}" style="text-decoration: none; color: #007bff; font-weight: bold; margin-right: 15px;">View Details</a>
 
             {% if house.id in applied_house_ids %}
-                <span class="badge-applied">Already applied</span><br>
+              <span style="color:#888;">Applied</span>
+            {% else %}
+              <form action="{% url 'process_apply' house.id %}" method="POST" style="display: inline;">
+                {% csrf_token %} <input type="submit" name="apply" value="Apply" style="cursor: pointer; color: #007bff; font-weight: bold;" onclick="return confirm('Are you sure to apply?');" />
+              </form>
             {% endif %}
-
-            {% if house.landlord.phone %}
-                <span><a class="contact-btn" href="https://wa.me/{{ house.landlord.phone }}?text=Hello%2C%20I%27m%20interested%20in%20{{ house.title|urlencode }}" target="_blank">Contact on WhatsApp</a></span>
-            {% endif %}
-
-            <div style="margin-top: 15px;">
-                <a href="{% url 'view_details' house.id %}" style="text-decoration: none; color: #007bff; font-weight: bold; margin-right: 15px;">View Details</a>
-
-                {% if house.id in applied_house_ids %}
-                    <span style="color:#888;">Applied</span>
-                {% else %}
-                <form action="{% url 'process_apply' house.id %}" method="POST" style="display: inline;">
-                    {% csrf_token %} <input type="submit" name="apply" value="Apply"
-                       style="cursor: pointer; color: #007bff; font-weight: bold;"
-                       onclick="return confirm('Are you sure to apply?');">
-                </form>
-                {% endif %}
-            </div>
+          </div>
         </div>
-    {% empty %}
+      {% empty %}
         <div style="text-align:center; width:100%; padding:50px;">
-            <h2 style="color:#555;">No houses match your search.</h2>
+          <h2 style="color:#555;">No houses match your search.</h2>
         </div>
-    {% endfor %}
+      {% endfor %}
     </div>
-
-</body>
+  </body>
 </html>
