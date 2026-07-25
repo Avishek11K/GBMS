@@ -37,17 +37,20 @@
           <div class="un">
             Username<br />
             <input type="text" name="username" placeholder="Enter username" />
+            {% if emptusername %}<span style="color: red;">{{ emptusername }}</span>{% endif %}
           </div>
           <br /><br />
           <div class="em">
             Email<br />
             <input type="email" name="email" placeholder="Enter email" />
-            <span style="color: red;justify-content:space-between;">{{ emptyemail }}</span>
+            <span style="color: red;justify-content:space-between;">{{ emptymail }}</span>
+            {% if emptemail %}<span style="color: red;">{{ emptemail }}</span>{% endif %}
           </div>
           <br /><br />
           <div class="pwd">
             Password<br />
             <input type="password" name="password" placeholder="Enter your password" />
+            {% if emptpassword %}<span style="color: red;">{{ emptpassword }}</span>{% endif %}
           </div>
           <div class="crerror">
             {% if crerror %}

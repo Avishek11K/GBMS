@@ -127,9 +127,9 @@ def loginUser(request):
             })
         if email=="" or username=="" or password=="":
             return render(request,"loginUser.html",{
-                "emptyemail": "Email shouldnt be empty!",
-                "emptyusername": "Username shouldnt be empty!",
-                "emptypassword": "Password shouldnt be empty!"
+                "emptemail": "Email shouldnt be empty!",
+                "emptusername": "Username shouldnt be empty!",
+                "emptpassword": "Password shouldnt be empty!"
             })
         
         if user.groups.filter(name="rentseeker").exists():
