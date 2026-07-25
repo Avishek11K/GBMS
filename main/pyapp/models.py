@@ -57,6 +57,7 @@ class Home(models.Model):
     def __str__(self):
         return self.title
 
+
 # not in use but can be used in future for available rent
 class availablerent(models.Model):
     home = models.ForeignKey(
@@ -71,8 +72,10 @@ class availablerent(models.Model):
 class HomeImage(models.Model):
     home = models.ForeignKey(Home, on_delete=models.CASCADE, related_name="images")
     image = models.ImageField(upload_to="houses/")
+
     def __str__(self):
-        return (f"Image for {self.home.title}")
+        return f"Image for {self.home.title}"
+
 
 # store the applied data by specified user in Application model
 # status added so landlord can accept/decline, and roomseeker can see the outcome
