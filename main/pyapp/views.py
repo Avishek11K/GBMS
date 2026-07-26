@@ -83,6 +83,12 @@ def register(request):
         email = request.POST.get("email", "")
         phone = request.POST.get("phone", "")
         password = request.POST.get("password")
+        if username == "" and email == "" and password == "" and role == "" and phone == "":
+            return render(
+                request,
+                "register.html",
+                {
+                    "blankuser": "Username shouldnt be empty!",
         if User.objects.filter(Q(username=username) | Q(email=email)).exists():
             return render(
                 request,
