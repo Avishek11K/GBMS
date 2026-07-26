@@ -55,6 +55,9 @@
           <div class="phone">
             Phone (used for WhatsApp contact)<br />
             <input type="text" name="phone" placeholder="e.g. 9779812345678" />
+            {% if blankphone %}
+              <span><p style="color:red">{{ blankphone }}</p></span>
+            {% endif %}
           </div>
           <br /><br />
 
