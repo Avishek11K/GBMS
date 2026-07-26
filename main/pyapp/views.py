@@ -88,7 +88,7 @@ def register(request):
                 request,
                 "register.html",
                 {
-                    "blankuser": "Username shouldnt be empty!",
+                    "blankuser": "Username shouldnt be empty!"})
         if User.objects.filter(Q(username=username) | Q(email=email)).exists():
             return render(
                 request,
