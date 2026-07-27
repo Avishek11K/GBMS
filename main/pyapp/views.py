@@ -94,6 +94,11 @@ def register(request):
                     "blankrole": "Role need to be selected!",
                     "blankphone": "Phone shouldnt be empty!"
                 })
+        if username =="" and email=="":
+            return render(request,"register.html",{
+                "blankuser": "Username shouldnt be empty",
+                "blankemail": "Email shouldnt be empty"
+            })
         if User.objects.filter(Q(username=username) | Q(email=email)).exists():
             return render(
                 request,
