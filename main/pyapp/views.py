@@ -99,6 +99,34 @@ def register(request):
                 "blankuser": "Username shouldnt be empty",
                 "blankemail": "Email shouldnt be empty"
             })
+        if username=="" and password=="":
+            return render(request,"register.html",{
+                "blankuser": "Username shouldnt be empty",
+                "blankpassword": "Password shouldnt be empty"
+            })
+        if email=="" and password=="":
+            return render(request,"register.html",{
+                "blankemail": "Email shouldnt be empty",
+                "blankpassword": "Password shouldnt be empty"
+            })
+        if username=="":
+            return render(request,"register.html",{
+                "blankuser": "Username shouldnt be empty"
+            })
+        if email=="":
+            return render(request,"register.html",{
+                "blankemail": "Email shouldnt be empty"
+            })
+        if password=="":
+            return render(request,"register.html",{
+                "blankpassword": "Password shouldnt be empty"
+            })
+        if username=="" and email=="" and password=="":
+            return render(request,"register.html",{
+                "blankuser": "Username shouldnt be empty",
+                "blankemail": "Email shouldnt be empty",
+                "blankpassword": "Password shouldnt be empty"
+            })
         if User.objects.filter(Q(username=username) | Q(email=email)).exists():
             return render(
                 request,
