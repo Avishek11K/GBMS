@@ -1,7 +1,6 @@
 # Create your views here.
 
 #importing built in django forgot password reset views
-from django.contrib.auth import views as auth_views
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.hashers import make_password
 from django.contrib import messages
