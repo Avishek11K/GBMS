@@ -4,6 +4,8 @@ from . import views
 # all the url are defined here the url which we hit in navbar corresponds here and views execute or render the content relevantly
 urlpatterns = [
     # adding the forget password and reset urls to the urls.py file
+    path('reset_password/', auth_views.PasswordResetView.as_view(template_name="pyapp/password_reset.html"), name="reset_password"),
+    path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name="pyapp/password_reset_sent.html"), name="password_reset_done"),
     path('', views.pyapp, name='pyapp'),
     path('contact', views.contact, name='contact'),
     path("profile", views.profile, name="profile"),
