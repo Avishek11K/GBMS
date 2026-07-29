@@ -3,6 +3,7 @@ from . import views
 
 # all the url are defined here the url which we hit in navbar corresponds here and views execute or render the content relevantly
 urlpatterns = [
+    # adding the forget password and reset urls to the urls.py file
     path('', views.pyapp, name='pyapp'),
     path('contact', views.contact, name='contact'),
     path("profile", views.profile, name="profile"),
