@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from django.contrib.auth import views as auth_views
 
 # all the url are defined here the url which we hit in navbar corresponds here and views execute or render the content relevantly
 urlpatterns = [
